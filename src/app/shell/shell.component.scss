@@ -1,0 +1,47 @@
+
+@use '@angular/material' as mat;
+@import "src/theme/theme-variables";
+ 
+
+:host {
+  display: flex;
+  flex: 1;
+
+  
+  --large-menu-width: 200px;
+  --small-menu-width: 73px;
+}
+
+.mat-sidenav {
+  background-color: mat.get-color-from-palette($app-primary);
+  min-width: var(--large-menu-width);
+  max-width: 28%;
+
+  &.small{
+    min-width: var(--small-menu-width);
+  }
+
+  mat-list a {
+    color: #fff;
+  }
+}
+
+.has-border {
+  border-right: 1px solid rgb(0 0 0 / 12%);
+}
+
+.mat-list {
+  padding-top: 0;
+}
+
+.mat-list-item {
+  text-decoration: none;
+
+  &:hover {
+    background: rgb(0 0 0 / 5%);
+  }
+}
+
+.menu-button {
+  margin-right: 1rem;
+}

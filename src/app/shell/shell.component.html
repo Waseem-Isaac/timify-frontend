@@ -1,0 +1,56 @@
+<div fxFlex>
+  <mat-sidenav-container fxFill>
+    <mat-sidenav
+      #sidenav
+      [mode]="'side'"
+      [opened]="true"
+      [class.small]="isSmall"
+      [disableClose]="true"
+      ngClass.gt-sm="has-border"
+    >
+      <mat-toolbar color="primary">
+        <span *ngIf="!isSmall">TIMIFY</span>
+        <div fxFlex></div>
+        <div>
+         
+          <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="!isSmall">
+            <mat-icon>person</mat-icon>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <mat-list>
+              <mat-list-item>
+                <span >Logged in as</span>&nbsp;<b>{{ username }}</b>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+            <button mat-menu-item (click)="logout()" >Logout</button>
+          </mat-menu>
+
+          <button mat-icon-button (click)="isSmall = !isSmall">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <nav *ngIf="!isSmall">
+        <mat-list>
+          <!-- <mat-divider></mat-divider> -->
+          <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="isSmall && sidenav.close()">
+            <span >Home</span>
+          </a>
+          <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="isSmall && sidenav.close()">
+            <span >About</span>
+          </a>
+        </mat-list>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content [ngStyle]="{'margin-left': isSmall ? 'var(--small-menu-width)'  : 'var(--large-menu-width)'}">
+      <!-- <mat-toolbar color="primary" class="mat-elevation-z6">
+        <button class="menu-button" mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>{{ title }}</span>
+      </mat-toolbar> -->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
