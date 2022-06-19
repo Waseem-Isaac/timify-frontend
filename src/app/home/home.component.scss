@@ -1,4 +1,8 @@
+
+@use '@angular/material' as mat;
+@import "src/theme/theme-variables";
+ 
 .container {
   // text-align: center;
-  padding: 1em;
+  padding: 1em;  
 }

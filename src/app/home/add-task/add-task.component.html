@@ -1,0 +1,17 @@
+<div class="add-task">
+    <input type="text" class="input" placeholder="What are you working on ?" #input>
+    <div class="additional-data">
+      <div>
+        <button mat-icon-button><mat-icon id="d">folder_open</mat-icon></button>
+      </div>
+      <div class="timer">
+        0:00:00
+      </div>
+      <div class="actions">
+        <button *ngIf="!isPlaying; else is_playing" mat-flat-button class="start" (click)="start(input.value)"><mat-icon>play_arrow</mat-icon></button>
+        <ng-template #is_playing>
+          <button mat-flat-button class="stop" (click)="stop()"><mat-icon>stop</mat-icon></button>
+        </ng-template>
+      </div>
+    </div>
+  </div>

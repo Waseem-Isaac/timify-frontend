@@ -6,9 +6,12 @@ import { SharedModule } from '@shared';
 import { MaterialModule } from '@app/material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './tasks/task/task.component';
 
 @NgModule({
   imports: [CommonModule, SharedModule, FlexLayoutModule, MaterialModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, AddTaskComponent, TasksComponent, TaskComponent],
 })
 export class HomeModule {}

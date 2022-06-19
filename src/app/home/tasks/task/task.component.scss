@@ -1,0 +1,14 @@
+.task{
+    padding: 10px;
+    background-color: #fff;
+    margin: 1px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .time {
+        display: flex;
+        justify-content: space-between;
+    }
+}

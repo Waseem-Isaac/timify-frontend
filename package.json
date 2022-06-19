@@ -14,7 +14,6 @@
     "write:env": "ngx-scripts env npm_package_version",
     "prettier": "prettier --write \"./src/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./src/**/*.{ts,js,html,scss}\"",
-    "postinstall": "npm run prettier -s && husky install",
     "generate": "ng generate"
   },
   "dependencies": {
@@ -60,7 +59,6 @@
     "eslint-plugin-prefer-arrow": "latest",
     "htmlhint": "^1.0.0",
     "https-proxy-agent": "^5.0.0",
-    "husky": "^7.0.1",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.3.0",

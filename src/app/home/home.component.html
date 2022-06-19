@@ -1,11 +1,8 @@
 <div class="container">
 
-  <h2>Create Task</h2>
+  <app-add-task (taskAdded$)="onAddTask($event)" (taskStopped$)="onStopTask()" [isPlaying]="isPlaying"></app-add-task>
 
-  <mat-card>
-    <h2>Screen content</h2>
-
-    <h4>Tasks table</h4>
-
-  </mat-card>
+    
+  <app-tasks></app-tasks>
+ 
 </div>

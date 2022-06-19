@@ -7,6 +7,7 @@
 
 // You can also read https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 // for more insight about Angular Material theming.
+@use '@angular/material' as mat;
 
 @import "~@angular/material/theming";
 
@@ -32,3 +33,8 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 // Material design icons font path
 $material-design-icons-font-directory-path: "~material-design-icons-iconfont/dist/fonts/";
+
+
+$color-primary-hover: #4e7487;
+$color-success: #1b5e20;
+$color-yellow: #f57f17;

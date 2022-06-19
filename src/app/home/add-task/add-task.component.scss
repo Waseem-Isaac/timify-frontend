@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+@import "src/theme/theme-variables";
+
+:host{
+    .add-task{
+        font-weight: 600;
+
+        background-color: #fff;
+        display: flex;
+        margin: 0 0 20px;
+        justify-content: space-between;
+        border-radius: 4px;
+        padding: 10px;
+        input{
+          width: 70%;
+          padding: 10px ;
+          outline: none;
+          border: none;
+          font-weight: 600;
+        }
+        .additional-data {
+          width: 30%; 
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+    
+          .start {
+            background-color:  mat.get-color-from-palette($app-primary);
+            color: #fff;
+            &:hover{
+              background-color: $color-primary-hover;
+              transition: all .2s;
+            }
+          }
+          .stop {
+            background-color: mat.get-color-from-palette($app-warn);
+            color: #fff;
+          }
+        }
+      }
+    
+}
