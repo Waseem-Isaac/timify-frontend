@@ -11,6 +11,7 @@
         justify-content: space-between;
         border-radius: 4px;
         padding: 10px;
+        box-shadow: rgb(44 19 56 / 20%) 0px 2px 12px 0px;
         input{
           width: 70%;
           padding: 10px ;
@@ -27,14 +28,20 @@
           .start {
             background-color:  mat.get-color-from-palette($app-primary);
             color: #fff;
-            &:hover{
-              background-color: $color-primary-hover;
-              transition: all .2s;
-            }
+            // border: 5px solid mat-color($app-primary,100);
+            outline: 5px solid mat-color($app-primary,100);
           }
           .stop {
+            outline: 5px solid mat-color($app-warn,100);
+
             background-color: mat.get-color-from-palette($app-warn);
             color: #fff;
+          }
+          .start, .stop{
+            &:hover{
+              outline-width: 4px;
+              transition: all .9s ease-out;
+            }
           }
         }
       }

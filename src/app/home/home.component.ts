@@ -17,12 +17,13 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
   }
 
-  onAddTask(addedTask: any){
-    this.isPlaying = addedTask;
-    this.tasks.unshift(addedTask)
+  onStartTask(task: any){
+    this.isPlaying = task;
   }
 
-  onStopTask(){
+  onStopTask(task: any){
     this.isPlaying = null;
+    // on stop task .. add it to the tasks list.
+    this.tasks.unshift(task);
   }
 }

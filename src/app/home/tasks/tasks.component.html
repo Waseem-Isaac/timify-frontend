@@ -1,6 +1,5 @@
 <div class="tasks">
-    <app-task></app-task>
-    <app-task></app-task>
-    <app-task></app-task>
-    <app-task></app-task>
-</div>
+    <ng-container *ngFor="let task of tasks"  >
+        <app-task [task]="task"></app-task>
+    </ng-container>
+</div> 

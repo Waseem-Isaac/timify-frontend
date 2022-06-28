@@ -1,11 +1,20 @@
 <div class="task">
-    <h5>No description</h5>
-    <p class="project badge">project name</p>
-    <div class="time">
-        <div class="start-time">11:00 PM </div> - 
-        <div class="end-time"> 12:00 PM</div>
+    <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
+        {{task?.description | truncate: [80, '...'] || '-'}}
+    </h5>
+    
+    <div class="additional-info">
+        <p class="project badge">{{task?.project || 'No Project'}}</p>
+        <div class="time">
+            <div class="start-time">{{task?.startTime | date:"h:mm:ss a"}}  </div> 
+            <div class="end-time"> - {{task?.endTime| date:"h:mm:ss a"}}</div>
+    
+            <div class="period">{{(task?.period?.hours + ":"+  task?.period?.minutes + ":" + task?.period?.seconds)}}</div>
+        </div>
+        <div class="actions">
+            <button mat-icon-button color="primary" (click)="play()"><mat-icon>play_arrow</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="delete()"><mat-icon>delete_outline</mat-icon></button>
+        </div>
     </div>
-    <div class="actions">
-        <button mat-icon-button color="warn"><mat-icon>pause</mat-icon></button>
-    </div>
+   
 </div>
