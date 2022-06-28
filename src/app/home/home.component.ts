@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '@app/@shared/interfaces';
+import { TasksService } from './tasks/tasks.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +13,27 @@ export class HomeComponent implements OnInit {
   tasks: Task[] = [];
   isPlaying!: Task | null;
 
-  constructor() {}
+  periodInterval: any;
+
+  constructor(private tasksService: TasksService) {}
 
   ngOnInit() {
     this.isLoading = true;
   }
 
   onStartTask(task: any){
+    // Calculate period.
+    this.periodInterval = setInterval(() => {
+      task['period'] = this.tasksService.calculateTaskPeriod(task?.startTime, task?.endTime);
+    }, 1000)
+
     this.isPlaying = task;
   }
 
   onStopTask(task: any){
     this.isPlaying = null;
+    clearInterval(this.periodInterval);
+    
     // on stop task .. add it to the tasks list.
     this.tasks.unshift(task);
   }

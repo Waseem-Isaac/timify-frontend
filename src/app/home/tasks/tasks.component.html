@@ -1,5 +1,5 @@
 <div class="tasks">
     <ng-container *ngFor="let task of tasks"  >
-        <app-task [task]="task"></app-task>
+        <app-task (taskResumed$)="onTaskResumed($event)" [task]="task"></app-task>
     </ng-container>
 </div> 

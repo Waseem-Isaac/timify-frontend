@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from '@app/@shared/interfaces';
 
 @Component({
@@ -6,12 +6,12 @@ import { Task } from '@app/@shared/interfaces';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent {
   @Input() tasks: Task[] = [];
+  @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onTaskResumed(task: any){
+    this.taskResumed$.next(task)
   }
 
 }

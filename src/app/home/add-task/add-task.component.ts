@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Task } from '@app/@shared/interfaces';
 import { TasksService } from '../tasks/tasks.service';
 
@@ -7,50 +7,37 @@ import { TasksService } from '../tasks/tasks.service';
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss']
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnChanges{
   @Input() isPlaying!: Task;
   @Output() taskStarted$: EventEmitter<Task> = new EventEmitter();
   @Output() taskStopped$: EventEmitter<Task | any> = new EventEmitter();
-  description: string = '';
-  periodInterval: any;
+  description: string = this.isPlaying?.description || '';
   constructor(private tasksService: TasksService) { }
 
-  ngOnInit(): void {  }
+  ngOnChanges(): void {
+    this.description = this.isPlaying?.description; 
+  }
 
-  start(){
-    /**
-     * - task started 
-     * - task period begin calculating.
-     * - task added
-     */
-    this.periodInterval = setInterval(() => {
-      this.isPlaying['period'] = this.tasksService.calculateTaskPeriod(this.isPlaying?.startTime, this.isPlaying.endTime);
-    }, 1000)
-
-    const task: Task = {
-      description: this.description || '-',
-      startTime: new Date(),
-      period: {hours: 0, minutes: 0, seconds: 0},
-      endTime: undefined,
-      user: {name: 'Waseem', email: 'waseem@test.test'},
-      project: null
-    } 
-
-    this.taskStarted$.next(task);
+  start(){  
+    this.taskStarted$.next(this.tasksService.defineTask(
+      {
+        description: this.description || '[No Description]',
+        startTime: new Date(),
+        period: {hours: 0, minutes: 0, seconds: 0},
+        endTime: undefined,
+        user: {name: 'Waseem', email: 'waseem@test.test'},
+        project: null
+      }
+    ));
   }
 
 
   stop(){
-     /**
-     * - task stopped.
-     * - task updated (endTime - description - project) if any changed.
-     */
-    clearInterval(this.periodInterval);
-
-    this.isPlaying.endTime = new Date();
-    this.isPlaying.description = this.description;
-
-    this.taskStopped$.next(this.isPlaying);
+    this.taskStopped$.next(this.tasksService.defineTask({
+      ...this.isPlaying,
+      period: this.isPlaying.period,
+      description: this.description, 
+      endTime: new Date()
+    }));
   }
-
 }
