@@ -17,6 +17,10 @@
   min-width: var(--large-menu-width);
   max-width: 28%;
 
+  box-shadow: rgb(44 19 56 / 20%) 0px 2px 12px 0px;
+  border-radius: 0 4px 4px 0;
+
+
   &.small{
     min-width: var(--small-menu-width);
   }

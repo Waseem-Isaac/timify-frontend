@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AboutComponent } from './about.component';
+import { ReportsComponent } from './reports.component';
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
-  { path: '', component: AboutComponent, data: { title: 'About' } },
+  { path: '', component: ReportsComponent, data: { title: 'About' } },
 ];
 
 @NgModule({
@@ -13,4 +13,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [],
 })
-export class AboutRoutingModule {}
+export class ReportsRoutingModule {}
