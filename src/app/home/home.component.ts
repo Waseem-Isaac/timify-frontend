@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '@app/@shared/interfaces';
+import { Project, Task } from '@app/@shared/interfaces';
 import { TasksService } from './tasks/tasks.service';
 
 @Component({
@@ -36,5 +36,11 @@ export class HomeComponent implements OnInit {
     
     // on stop task .. add it to the tasks list.
     this.tasks.unshift(task);
+  }
+
+  onAddProject(project: Project){
+    this.tasksService.addProject(project).subscribe(res => {
+      console.log('res');
+    },err => console.log(err))
   }
 }

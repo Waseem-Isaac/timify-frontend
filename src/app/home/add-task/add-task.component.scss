@@ -12,6 +12,7 @@
         border-radius: 4px;
         padding: 10px;
         box-shadow: rgb(44 19 56 / 20%) 0px 2px 12px 0px;
+        min-height: 70px;
         input{
           width: 70%;
           padding: 10px ;
@@ -43,7 +44,57 @@
               transition: all .9s ease-out;
             }
           }
+
+
+         
         }
+      } 
+}
+
+
+::ng-deep {
+  .mat-form-field.select-project {
+    mat-label mat-icon#icon {
+      font-size: 20px;
+    }
+    &:not(.mat-form-field-should-float){
+      width: 40px;
+      .mat-form-field-infix {
+        border-top: none;
       }
+    }
+
+    &.mat-form-field-should-float{
+      .mat-select-arrow{
+        border: none;
+      }
+    }
+    .mat-form-field-infix {
+      width: 110px;
+    }
+  
+    .mat-form-field-appearance-fill .mat-form-field-flex{
+      padding: 0;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-select-arrow-wrapper{
+      display: block;
+    }
+
     
+  }
+}
+
+
+.add-project {
+    width: 100%;
+    border-top: 1px solid #f0f0f0;
+    border-radius: 0;
+    .mat-icon{
+      font-size: 20px;
+      color: mat-color($app-primary);
+    }
 }

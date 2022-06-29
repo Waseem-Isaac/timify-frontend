@@ -1,6 +1,11 @@
 <div class="container">
 
-  <app-add-task (taskStarted$)="onStartTask($event)" (taskStopped$)="onStopTask($event)" [isPlaying]="isPlaying"></app-add-task>
+  <app-add-task 
+    (taskStarted$)="onStartTask($event)" 
+    (taskStopped$)="onStopTask($event)" 
+    (projectAdded$)="onAddProject($event)"
+    [isPlaying]="isPlaying">
+  </app-add-task>
    
   <app-tasks (taskResumed$)="onStartTask($event)" [tasks]="tasks"></app-tasks>
  

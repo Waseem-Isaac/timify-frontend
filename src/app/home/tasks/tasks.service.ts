@@ -1,13 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Task } from '@app/@shared/interfaces';
+import { Task , Project} from '@app/@shared/interfaces';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
 
   calculateTaskPeriod(startTime: Date, endTime: Date = new Date()){
     return moment.duration(Math.ceil(moment(endTime).diff(moment(startTime))))['_data'];
@@ -23,5 +25,15 @@ export class TasksService {
       project: task!.project,
       ...task
     }
+  }
+
+
+  // Add Project
+  addProject(project: Project): Observable<Project>{
+    return this._http.post<Project>('projects', project);
+  }
+
+  getProjects(): Observable<Project[]>{
+    return this._http.get<Project[]>('projects');
   }
 }

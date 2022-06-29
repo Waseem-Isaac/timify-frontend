@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Task } from '@app/@shared/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { Project, Task } from '@app/@shared/interfaces';
+import { Observable, of } from 'rxjs';
 import { TasksService } from '../tasks/tasks.service';
+import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 
 @Component({
   selector: 'app-add-task',
@@ -11,11 +14,17 @@ export class AddTaskComponent implements OnChanges{
   @Input() isPlaying!: Task;
   @Output() taskStarted$: EventEmitter<Task> = new EventEmitter();
   @Output() taskStopped$: EventEmitter<Task | any> = new EventEmitter();
+  @Output() projectAdded$: EventEmitter<Project | any> = new EventEmitter();
+  projects$: Observable<Project[]> = this.tasksService.getProjects();
+   
   description: string = this.isPlaying?.description || '';
-  constructor(private tasksService: TasksService) { }
+  project: Project | null = this.isPlaying?.project || null;
+  constructor(public tasksService: TasksService, public dialog: MatDialog) { }
 
   ngOnChanges(): void {
     this.description = this.isPlaying?.description; 
+    this.project = this.isPlaying?.project; 
+
   }
 
   start(){  
@@ -26,7 +35,7 @@ export class AddTaskComponent implements OnChanges{
         period: {hours: 0, minutes: 0, seconds: 0},
         endTime: undefined,
         user: {name: 'Waseem', email: 'waseem@test.test'},
-        project: null
+        project: this.project
       }
     ));
   }
@@ -37,7 +46,23 @@ export class AddTaskComponent implements OnChanges{
       ...this.isPlaying,
       period: this.isPlaying.period,
       description: this.description, 
+      project: this.project,
       endTime: new Date()
     }));
+  }
+
+  addProject(){
+    // console.log('Create new project')
+    // this.projectAdded$.next({name: 'inital project'})
+
+      const dialogRef = this.dialog.open(AddProjectDialogComponent, {
+        data: {project: this.project},
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.project = result;
+        console.log(result)
+      });
   }
 }
