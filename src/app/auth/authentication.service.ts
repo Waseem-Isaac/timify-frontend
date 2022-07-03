@@ -1,13 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoginContext, RegisterContext } from '@app/@shared/interfaces';
 import { Observable, of } from 'rxjs';
-
+import { map, catchError } from 'rxjs/operators';
 import { Credentials, CredentialsService } from './credentials.service';
-
-export interface LoginContext {
-  username: string;
-  password: string;
-  remember?: boolean;
-}
 
 /**
  * Provides a base for authentication workflow.
@@ -17,7 +13,7 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(private credentialsService: CredentialsService, private _http: HttpClient) {}
 
   /**
    * Authenticates the user.
@@ -25,13 +21,19 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      token: '123456',
-    };
-    this.credentialsService.setCredentials(data, context.remember);
-    return of(data);
+    return this._http.post('login', context).pipe(
+      map((res: any) => {            
+        const data: Credentials = {
+          email: context.email,
+          token: res?.token,
+          picture: res?.userData?.picture
+        };
+
+        this.credentialsService.setCredentials(data, context.remember);
+        return data;
+      })
+    );
+    
   }
 
   /**
@@ -42,5 +44,10 @@ export class AuthenticationService {
     // Customize credentials invalidation here
     this.credentialsService.setCredentials();
     return of(true);
+  }
+
+  register(context: RegisterContext): Observable<any> {
+    // Replace by proper authentication call
+    return this._http.post('users', context);
   }
 }

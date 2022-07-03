@@ -46,6 +46,10 @@
   }
 }
 
+::ng-deep .top-menu .mat-list-base .mat-list-item,.top-menu .mat-list-base .mat-list-option{
+  height: 100px;
+}
+
 .menu-button {
   margin-right: 1rem;
 }

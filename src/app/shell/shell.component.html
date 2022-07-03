@@ -16,10 +16,11 @@
           <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="!isSmall">
             <mat-icon>person</mat-icon>
           </button>
-          <mat-menu #userMenu="matMenu">
+          <mat-menu #userMenu="matMenu" class="top-menu">
             <mat-list>
               <mat-list-item>
-                <span >Logged in as</span>&nbsp;<b>{{ username }}</b>
+                <img [src]="credentials?.picture" class="profile-img sm" alt="">
+                &nbsp;<b>{{ credentials?.email }}</b>
               </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
@@ -27,7 +28,7 @@
           </mat-menu>
 
           <button mat-icon-button (click)="isSmall = !isSmall">
-            <mat-icon>menu</mat-icon>
+            <mat-icon>{{ isSmall ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
           </button>
         </div>
       </mat-toolbar>

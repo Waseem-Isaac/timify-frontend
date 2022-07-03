@@ -1,0 +1,117 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-55 p-b-54">
+      <form class="login100-form validate-form" [formGroup]="registerForm">
+        <span class="login100-form-title p-b-20">
+          Sign up
+        </span>
+
+
+        <div class="m-b-23">
+          <div class="">
+            <!-- <span class="label-input100">Image</span> -->
+            <div class="input-container">
+             
+              <label *ngIf="!this.registerForm.get('picture')?.value; else showImage" for="file-upload" class="custom-file-upload">
+                <mat-icon class="icon">add_a_photo</mat-icon>
+              </label>
+
+              <ng-template #showImage>
+                <div class="uploaded-img">
+                  <img class="profile-img lg" *ngIf="this.registerForm.get('picture')?.value" [src]="this.registerForm.get('picture').value" alt="">
+                  <mat-icon (click)="this.registerForm.get('picture').setValue(null)">close</mat-icon>
+                </div>
+                
+              </ng-template>
+
+              <input id="file-upload" #imageInput accept="image/*" (input)="processFile(imageInput); imageInput.value= null" type="file"/>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="m-b-23">
+          <div class="wrap-input100 validate-input">
+            <span class="label-input100">username</span>
+            <div class="input-container">
+              <mat-icon class="icon">person</mat-icon>
+              <input class="input100" type="text" formControlName="username" autocomplete="username"
+                placeholder="Type your username">
+              <span class="focus-input100"></span>
+
+            </div>
+
+          </div>
+          <small class="validation text-warn"
+            *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
+            Name is required
+          </small>
+        </div>
+
+        <div class="m-b-23">
+          <div class="wrap-input100 validate-input">
+            <span class="label-input100">Email</span>
+            <div class="input-container">
+              <mat-icon class="icon">email</mat-icon>
+              <input class="input100" type="text" formControlName="email" autocomplete="email"
+                placeholder="Type your email">
+              <span class="focus-input100"></span>
+
+            </div>
+          </div>
+          <small class="validation" *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['required']">
+            Email is required
+          </small>
+          <small class="validation" *ngIf="registerForm.controls['email']?.errors?.['pattern']">
+            Email is invalid
+          </small>
+        </div>
+
+        <div class="m-b-23">
+
+          <div class="wrap-input100 validate-input">
+            <span class="label-input100">Password</span>
+            <div class="input-container">
+              <mat-icon class="icon">lock</mat-icon>
+              <input class="input100" type="password" formControlName="password" autocomplete="current-password"
+                placeholder="Type your password">
+              <span class="focus-input100"></span>
+            </div>
+
+          </div>
+          <small class="validation text-warn"
+            *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['required']">
+            Password is required
+          </small>
+          <small class="validation" *ngIf="registerForm.controls['password'].errors?.['minlength']">
+            Password must not be less than 6 characters
+          </small>
+        </div>
+
+        <div class="container-login100-form-btn  m-t-30">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" color="primary" type="submit" (click)="register()" [disabled]="registerForm.invalid || isLoading">
+              <span *ngIf="!isLoading;else loader" >Sign up</span>
+              <ng-template #loader>
+                <mat-spinner [diameter]="20"></mat-spinner>
+              </ng-template>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex-col-c p-t-50">
+          <div class="txt1 p-b-17">
+            Have account ? <a routerLink="/login">
+              Sign in
+            </a>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>

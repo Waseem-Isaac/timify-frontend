@@ -5,7 +5,8 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { UntilDestroy, untilDestroyed } from '@shared';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../authentication.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @UntilDestroy()
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar
   ) {
     this.createForm();
   }
@@ -44,20 +46,26 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (credentials) => {
-          console.log(`${credentials.username} successfully logged in`);
+          console.log(`${credentials.email} successfully logged in`);
           this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
         },
         (error) => {
           console.log(`Login error: ${error}`);
           this.error = error;
+
+          this._snackBar.open(error?.error?.message || 'Email or password are incorrect', 'Ok', {
+            panelClass: ['custom-snackbar'],
+            horizontalPosition: 'left',
+            verticalPosition: 'bottom'
+          })
         }
       );
   }
 
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      email    : ['' , [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
+      password : ['' , [Validators.required , Validators.minLength(6)]],
       remember: true,
     });
   }

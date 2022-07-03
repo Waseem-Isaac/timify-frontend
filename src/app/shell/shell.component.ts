@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
-import { AuthenticationService, CredentialsService } from '@app/auth';
+import { AuthenticationService, Credentials, CredentialsService } from '@app/auth';
 
 @Component({
   selector: 'app-shell',
@@ -26,9 +26,9 @@ export class ShellComponent implements OnInit {
     this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
   }
 
-  get username(): string | null {
+  get credentials(): Credentials | null {
     const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
+    return credentials || null
   }
 
   get isSmall(): boolean {

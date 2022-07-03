@@ -4,6 +4,7 @@
  */
 
 // stylelint-disable-next-line selector-max-universal
+
 * {
   box-sizing: border-box;
 }
@@ -42,4 +43,28 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: mat-color($app-primary);
+}
+
+.custom-snackbar {
+  background-color:mat-color($app-warn);
+  color: #fff;
+
+  .mat-simple-snackbar-action{
+    color: #fff;
+  }
+}
+
+.profile-img {
+  &.sm{
+    width: 50px;
+    height: 50px;
+  }
+  &.lg{
+    width: 100px;
+    height: 100px;
+  }
+  object-fit: cover;
+  object-position: 20% 10%;
+  border: 2px solid #fff;
+  border-radius: 50%;
 }

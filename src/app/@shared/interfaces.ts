@@ -24,3 +24,16 @@ export interface User {
 export interface Project{
     name: string;
 }
+
+export interface LoginContext {
+    email: string;
+    password: string;
+    remember?: boolean;
+}
+
+export interface RegisterContext {
+    username: string;
+    email: string;
+    password: string;
+    picture?: string;
+}
