@@ -41,6 +41,8 @@
             color: #fff;
           }
           .start, .stop{
+            border-radius: 0;
+
             &:hover{
               outline-width: 4px;
               transition: all .9s ease-out;
@@ -56,8 +58,12 @@
 
 ::ng-deep {
   .mat-form-field.select-project {
+    .mat-select-arrow{
+      color: $color-grey;
+    }
     mat-label mat-icon#icon {
       font-size: 20px;
+      color: $color-grey;
     }
     &:not(.mat-form-field-should-float){
       width: 40px;
