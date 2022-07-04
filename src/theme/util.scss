@@ -9313,13 +9313,13 @@
 }
 
 .flex-m {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-align-items: center;
-    align-items: center
+    display: -webkit-box !important; 
+    display: -webkit-flex !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-align-items: center !important;
+    align-items: center !important;
 }
 
 .flex-str {

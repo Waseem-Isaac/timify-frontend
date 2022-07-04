@@ -40,6 +40,20 @@ body {
   border-radius: 20px;
 }
 
+::-webkit-input-placeholder { /* Edge */
+  color: $color-grey;
+  font-weight: normal;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $color-grey;
+}
+
+::placeholder {
+  color: $color-grey;
+  font-weight: normal;
+}
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: mat-color($app-primary);

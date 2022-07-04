@@ -4,7 +4,7 @@ export interface Credentials {
   // Customize received credentials here
   email: string;
   token: string;
-  picture: string
+  picture?: string
 }
 
 const credentialsKey = 'credentials';
