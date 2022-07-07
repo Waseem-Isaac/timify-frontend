@@ -35,7 +35,6 @@ export class AddTaskComponent implements OnChanges{
         startTime: new Date(),
         period: {hours: 0, minutes: 0, seconds: 0},
         endTime: undefined,
-        user: {name: 'Waseem', email: 'waseem@test.test'},
         project: this.project
       }
     ));

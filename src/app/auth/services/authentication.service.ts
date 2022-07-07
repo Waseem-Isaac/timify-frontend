@@ -26,7 +26,8 @@ export class AuthenticationService {
         const data: Credentials = {
           email: context.email,
           token: res?.token,
-          picture: res?.userData?.picture
+          picture: res?.userData?.picture,
+          userId: res?.userData?._id
         };
 
         this.credentialsService.setCredentials(data, context.remember);
