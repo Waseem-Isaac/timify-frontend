@@ -106,3 +106,12 @@ nav {
   }
  } 
 }
+
+button.switch-mode{
+  position: fixed;
+  right: 5px;
+    bottom: 5px;
+    z-index: 1;
+    background: mat-color($app-primary);
+    color: #fff;
+}

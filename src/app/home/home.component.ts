@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Project, Task } from '@app/@shared/interfaces';
 import { TasksService } from './tasks/tasks.service';
 
@@ -8,10 +8,13 @@ import { TasksService } from './tasks/tasks.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  // @ViewChild('add_task_el') add_task_field!: ElementRef<HTMLElement>; 
+
   quote: string | undefined;
   isLoading = false;
   tasks: Task[] = [];
   isPlaying!: Task | null;
+  focus: boolean = false;
 
   periodInterval: any;
 
@@ -42,5 +45,11 @@ export class HomeComponent implements OnInit {
     this.tasksService.addProject(project).subscribe(res => {
       console.log('res');
     },err => console.log(err))
+  }
+
+  focusAddTaskInput(){
+    let input: HTMLInputElement = document.querySelector('#add_task_input') as HTMLInputElement;
+    input.classList.add('on-focus')
+    input.focus();
   }
 }

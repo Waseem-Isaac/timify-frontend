@@ -13,7 +13,25 @@
         </div>
         <div class="actions">
             <button mat-icon-button color="primary" (click)="play()"><mat-icon>play_arrow</mat-icon></button>
-            <button mat-icon-button color="warn" (click)="delete()"><mat-icon>delete_outline</mat-icon></button>
+            <button mat-icon-button color="primary"  [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
+       
+              <mat-menu #userMenu="matMenu">
+                <mat-list>
+                  <mat-list-item>
+                    <button mat-button color="warn" class="p-l-0 p-r-0">
+                        <mat-icon class="fs-20">delete_outline</mat-icon>
+                        <b>Delete</b>
+                    </button>
+
+                  </mat-list-item>
+                  <!-- <mat-divider></mat-divider> -->
+                </mat-list>
+                
+              </mat-menu>
+            
+
+       
+       
         </div>
     </div>
    

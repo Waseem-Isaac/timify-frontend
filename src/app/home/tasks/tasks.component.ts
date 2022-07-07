@@ -13,5 +13,4 @@ export class TasksComponent {
   onTaskResumed(task: any){
     this.taskResumed$.next(task)
   }
-
 }
