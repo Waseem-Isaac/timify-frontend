@@ -1,12 +1,19 @@
 <div class="container">
 
   <app-add-task 
-    (taskStarted$)="onStartTask($event)" 
-    (taskStopped$)="onStopTask($event)" 
-    (projectAdded$)="onAddProject($event)"
-    [isPlaying]="isPlaying">
+    (taskStarted$)="onStartTask($event)" (taskStopped$)="onStopTask($event)"
+    (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus">
   </app-add-task>
-   
-  <app-tasks (taskResumed$)="onStartTask($event)" [tasks]="tasks"></app-tasks>
- 
+
+  <div *ngIf="tasks?.length; else empty">
+    <app-tasks (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" [tasks]="tasks"></app-tasks>   
+  </div>
+
+  <ng-template #empty>
+    <div class="empty flex-m flex-c w-full">
+      <mat-icon class="m-r-5">error_outline</mat-icon>
+      <h4>No Tasks so far, <span class="link" (click)="focusAddTaskInput()">Create a new one ?</span></h4>
+    </div>
+  </ng-template>
+
 </div>

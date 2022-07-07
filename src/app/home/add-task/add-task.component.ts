@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Project, Task } from '@app/@shared/interfaces';
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,8 @@ export class AddTaskComponent implements OnChanges{
   @Output() taskStarted$: EventEmitter<Task> = new EventEmitter();
   @Output() taskStopped$: EventEmitter<Task | any> = new EventEmitter();
   @Output() projectAdded$: EventEmitter<Project | any> = new EventEmitter();
+  @Input() focus!: boolean;
+
   projects$: Observable<Project[]> = this.tasksService.getProjects();
    
   description: string = this.isPlaying?.description || '';
@@ -24,7 +26,6 @@ export class AddTaskComponent implements OnChanges{
   ngOnChanges(): void {
     this.description = this.isPlaying?.description; 
     this.project = this.isPlaying?.project; 
-
   }
 
   start(){  
@@ -34,7 +35,6 @@ export class AddTaskComponent implements OnChanges{
         startTime: new Date(),
         period: {hours: 0, minutes: 0, seconds: 0},
         endTime: undefined,
-        user: {name: 'Waseem', email: 'waseem@test.test'},
         project: this.project
       }
     ));

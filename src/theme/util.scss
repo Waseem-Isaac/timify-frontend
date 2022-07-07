@@ -2807,7 +2807,7 @@
 }
 
 .p-l-0 {
-    padding-left: 0
+    padding-left: 0 !important
 }
 
 .p-l-1 {
@@ -3811,7 +3811,7 @@
 }
 
 .p-r-0 {
-    padding-right: 0
+    padding-right: 0 !important
 }
 
 .p-r-1 {
@@ -9010,6 +9010,9 @@
 
 .h-full {
     height: 100%
+}
+.h-full-vh {
+    height: 100vh
 }
 
 .max-w-full {

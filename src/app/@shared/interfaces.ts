@@ -1,9 +1,9 @@
 export interface Task {
-    id?: string;
+    _id?: string;
     description: string;
     startTime: any;
     endTime: any;
-    user: User;
+    user?: string;
     project: Project | null;
     period?: {
         days?: number,

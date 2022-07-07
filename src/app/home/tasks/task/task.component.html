@@ -1,10 +1,10 @@
-<div class="task">
+<div class="task" *ngIf="task?.endTime">
     <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
         {{task?.description | truncate: [80, '...'] || '-'}}
     </h5>
     
     <div class="additional-info">
-        <p class="project badge">{{task?.project || 'No Project'}}</p>
+        <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
         <div class="time">
             <div class="start-time">{{task?.startTime | date:"h:mm:ss a"}}  </div> 
             <div class="end-time"> - {{task?.endTime| date:"h:mm:ss a"}}</div>
@@ -13,7 +13,25 @@
         </div>
         <div class="actions">
             <button mat-icon-button color="primary" (click)="play()"><mat-icon>play_arrow</mat-icon></button>
-            <button mat-icon-button color="warn" (click)="delete()"><mat-icon>delete_outline</mat-icon></button>
+            <button mat-icon-button color="primary"  [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
+       
+              <mat-menu #userMenu="matMenu">
+                <mat-list>
+                  <mat-list-item>
+                    <button (click)="delete()" mat-button color="warn" class="p-l-0 p-r-0">
+                        <mat-icon class="fs-20">delete_outline</mat-icon>
+                        <b>Delete</b>
+                    </button>
+
+                  </mat-list-item>
+                  <!-- <mat-divider></mat-divider> -->
+                </mat-list>
+                
+              </mat-menu>
+            
+
+       
+       
         </div>
     </div>
    

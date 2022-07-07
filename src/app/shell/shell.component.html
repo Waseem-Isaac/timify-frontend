@@ -1,6 +1,7 @@
 <div fxFlex>
-  <mat-sidenav-container fxFill>
+  <mat-sidenav-container fxFill [ngClass]="isDarkMode ? 'dark' : 'light'" >
     <mat-sidenav
+      fixedInViewport="true" 
       #sidenav
       [mode]="'side'"
       [opened]="true"
@@ -12,7 +13,7 @@
         <!-- <span>T</span>imify -->
 
         <div *ngIf="!isSmall" class="flex-b">
-          <img src="/assets/logo.png" class="logo" width="50px" height="30px" alt=""><span>imify</span>
+          <img [src]="isDarkMode ? '/assets/logo-white-2.png' : '/assets/logo.png'" class="logo" width="50px" height="30px" alt=""><span>imify</span>
         </div>
         <div fxFlex></div>
         <div>
@@ -58,6 +59,8 @@
 
 
 
+
+
      
 
       </nav>
@@ -73,3 +76,11 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
+
+
+
+<button mat-icon-button class="switch-mode" (click)="isDarkMode = !isDarkMode">
+  <mat-icon>
+    {{ isDarkMode ? 'light_mode' : 'dark_mode' }}
+  </mat-icon>
+</button>

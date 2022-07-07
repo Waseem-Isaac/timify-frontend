@@ -12,6 +12,8 @@ import { AuthenticationService, Credentials, CredentialsService } from '@app/aut
 })
 export class ShellComponent implements OnInit {
   private _isSmall = false;
+  isDarkMode = true;
+
   constructor(
     private router: Router,
     private titleService: Title,

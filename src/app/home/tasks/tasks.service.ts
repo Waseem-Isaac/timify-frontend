@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task , Project} from '@app/@shared/interfaces';
+import { CredentialsService } from '@app/auth';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class TasksService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
   calculateTaskPeriod(startTime: Date, endTime: Date = new Date()){
     return moment.duration(Math.ceil(moment(endTime).diff(moment(startTime))))['_data'];
@@ -17,14 +18,31 @@ export class TasksService {
 
   defineTask(task?: Task): Task{
     return {
+      user: this.credentialsService?.credentials?.userId as string, // Get the current user.
+
       description: task?.description || '-',
       startTime: task?.startTime,
       period: task?.period,
       endTime: task?.endTime,
-      user: {name: 'Waseem', email: 'waseem@test.test'},
       project: task!.project,
       ...task
     }
+  }
+
+  getTasks(): Observable<Task[]>{
+    return this._http.get<Task[]>('tasks');
+  }
+
+  startTask(task: Task){
+    return this._http.post<Task>('tasks', task);
+  }
+
+  stopTask(task: Task){
+    return this._http.put<{message: string, task: Task}>('tasks/'+task?._id, task);
+  }
+
+  deleteTask(taskId: string){
+    return this._http.delete('tasks/'+taskId)
   }
 
 

@@ -1,6 +1,6 @@
 <div class="add-task">
-    <input  (keydown.enter) ="!isPlaying ? start() : stop()"
-      type="text"class="input" placeholder="What are you working on ?" [(ngModel)]="description">
+    <input (keydown.enter) ="!isPlaying ? start() : stop()"
+      type="text" id="add_task_input" placeholder="What are you working on ?" [(ngModel)]="description">
     <div class="additional-data">
       <div>
         <!-- (click)="addProject()" -->
@@ -18,7 +18,7 @@
               <mat-option>None</mat-option>
 
               <!-- Projects -->
-              <mat-option *ngFor="let project of (projects$ | async)" [value]="project.name">{{project?.name}}</mat-option>
+              <mat-option *ngFor="let project of (projects$ | async)" [value]="project._id">{{project?.name}}</mat-option>
               
               <button mat-flat-button btn-block class="add-project" (click)="addProject()">
                 <mat-icon>add</mat-icon>Add new

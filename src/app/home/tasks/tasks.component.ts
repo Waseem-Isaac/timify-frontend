@@ -9,9 +9,13 @@ import { Task } from '@app/@shared/interfaces';
 export class TasksComponent {
   @Input() tasks: Task[] = [];
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
+  @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
 
   onTaskResumed(task: any){
     this.taskResumed$.next(task)
   }
-
+  
+  onTaskDeleted(taskId: string){
+    this.taskDeleted$.next(taskId)
+  }
 }

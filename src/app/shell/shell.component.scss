@@ -8,7 +8,7 @@
   flex: 1;
 
   
-  --large-menu-width: 200px;
+  --large-menu-width: 160px;
   --small-menu-width: 73px;
 }
 
@@ -16,17 +16,10 @@
   background-color: #fff;
 }
 .mat-sidenav {
-  // background-color: mat.get-color-from-palette($app-primary);
-  // box-shadow: rgb(44 19 56 / 20%) 0px 2px 12px 0px;
-
   min-width: var(--large-menu-width);
   max-width: 28%;
 
-  // border-radius: 0 4px 4px 0;
-
   .mat-toolbar{
-    background-color: #fff;
-    color: mat-color($app-primary);
     margin: 20px 0 40px;
     span {
       font-weight: 700;
@@ -40,11 +33,6 @@
   &.small{
     min-width: var(--small-menu-width);
   }
-
-  mat-list a {
-    color: mat-color($app-primary);
-  }
-  
 }
 
 .has-border {
@@ -57,10 +45,6 @@
 
 .mat-list-item {
   text-decoration: none;
-
-  // &:hover {
-  //   background: rgb(0 0 0 / 5%);
-  // }
 }
 
 ::ng-deep .top-menu .mat-list-base .mat-list-item,.top-menu .mat-list-base .mat-list-option{
@@ -73,12 +57,8 @@
 
 nav {
   .list-items {
-    // font-weight: 600;
-    // border-top: .1px solid rgb(0 0 0 / 12%);
     a{
       font-size: 14px;
-      // height: 35px;
-      // border-bottom: .1px solid rgb(0 0 0 / 12%);
       font-family: 'Open Sans', sans-serif;
 
       border-inline: none;
@@ -97,4 +77,41 @@ nav {
       }
     }
   }
+}
+
+
+
+
+.light{
+  .mat-sidenav {
+    background-color: #fff;
+    .mat-toolbar{
+      background-color:  #fff;
+      color: mat-color($app-primary);
+    }
+    mat-list a {
+      color: mat-color($app-primary);
+    }
+   } 
+}
+.dark {
+ .mat-sidenav {
+  background-color: mat.get-color-from-palette($app-primary);
+  .mat-toolbar{
+    background-color:  mat-color($app-primary);
+    color: #fff;
+  }
+  mat-list a {
+    color: #fff;
+  }
+ } 
+}
+
+button.switch-mode{
+  position: fixed;
+  right: 5px;
+    bottom: 5px;
+    z-index: 1;
+    background: mat-color($app-primary);
+    color: #fff;
 }
