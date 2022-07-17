@@ -1,5 +1,10 @@
 <div class="tasks">
-    <ng-container *ngFor="let task of tasks"  >
-        <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" [task]="task"></app-task>
+    <ng-container *ngFor="let task of tasks">
+        <div class="m-t-20 m-l-20 m-b-10">
+            {{task?.day}}
+        </div>
+        <div *ngFor="let task of task.tasks">
+            <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" [task]="task"></app-task>
+        </div>
     </ng-container>
 </div> 

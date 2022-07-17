@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Project, Task } from '@app/@shared/interfaces';
+import { CategoizedTaskPerDay, Project, Task } from '@app/@shared/interfaces';
 import { Observable } from 'rxjs';
 import { TasksService } from './tasks/tasks.service';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,7 @@ export class HomeComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
   tasks: Task[] = [];
+  categorizedTasks: CategoizedTaskPerDay[]= [];
   isPlaying!: Task | null;
   focus: boolean = false;
 
@@ -29,6 +32,7 @@ export class HomeComponent implements OnInit {
   getTasks(){
     this.tasksService.getTasks().pipe().subscribe(res => {
       this.tasks = res;
+      this.categroizeTasksPerDay(this.tasks);
     })
   }
 
@@ -51,6 +55,7 @@ export class HomeComponent implements OnInit {
 
       // on stop task .. add it to the tasks list.
       this.tasks.unshift(res?.task);
+      this.categroizeTasksPerDay(this.tasks);
     })
   }
 
@@ -58,6 +63,7 @@ export class HomeComponent implements OnInit {
     console.log(taskId)
     this.tasksService.deleteTask(taskId).pipe().subscribe(res => {
       this.tasks = this.tasks.filter(t => t._id !== taskId)
+      this.categroizeTasksPerDay(this.tasks);
     })
   }
 
@@ -71,5 +77,17 @@ export class HomeComponent implements OnInit {
     let input: HTMLInputElement = document.querySelector('#add_task_input') as HTMLInputElement;
     input.classList.add('on-focus')
     input.focus();
+  }
+
+
+  // Helpers
+  categroizeTasksPerDay(tasks: Task[]){
+    tasks= tasks.map((task: Task) => { return { day: moment(task.endTime).format('D MMM YYYY') ,...task} });
+      
+    this.categorizedTasks = (
+      _(tasks).groupBy('day')
+      .map((tasks, day) => ({ day, tasks }))
+      .value()
+    );
   }
 }
