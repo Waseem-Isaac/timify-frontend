@@ -9,7 +9,9 @@
   box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Open+Sans:wght@400&family=Roboto:wght@300&display=swap');html,
+// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Open+Sans:wght@400&family=Roboto:wght@300&display=swap');html,
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500&family=Open+Sans:wght@400;500&family=Roboto:wght@400;500&family=Rubik:wght@400;500&display=swap');
+
 body {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,8 @@ body {
   // font-family: 'Lato', sans-serif;
   // font-family: 'Roboto', sans-serif;
   font-family: 'Open Sans', sans-serif;
+  // font-family: 'Rubik', sans-serif;
+
   letter-spacing: 1.2px;;
 }
 
@@ -81,4 +85,21 @@ body {
   object-position: 20% 10%;
   border: 2px solid #fff;
   border-radius: 50%;
+}
+
+.empty-block {
+  height: 80vh;
+  h4{
+      color: $color-grey;
+  }
+  .link {
+      color: mat-color($app-primary);
+      cursor: pointer;
+  }
+  mat-icon {
+    font-size: 50px;
+    height: 50px;
+    width: 50px;
+    color: $color-grey;
+  }
 }

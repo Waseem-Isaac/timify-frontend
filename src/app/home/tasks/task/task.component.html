@@ -6,8 +6,8 @@
     <div class="additional-info">
         <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
         <div class="time">
-            <div class="start-time">{{task?.startTime | date:"h:mm:ss a"}}  </div> 
-            <div class="end-time"> - {{task?.endTime| date:"h:mm:ss a"}}</div>
+            <div class="start-time">{{task?.startTime | date:"h:mm a"}}  </div> 
+            <div class="end-time"> - {{task?.endTime| date:"h:mm a"}}</div>
     
             <div class="period">{{(task?.period?.hours + ":"+  task?.period?.minutes + ":" + task?.period?.seconds)}}</div>
         </div>
