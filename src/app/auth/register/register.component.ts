@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
 import { UntilDestroy, untilDestroyed } from '@shared';
@@ -16,14 +16,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RegisterComponent implements OnInit {
   error: string | undefined;
-  registerForm!: FormGroup;
+  registerForm!: UntypedFormGroup;
   isLoading = false;
   // uploadedImagePath!: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar
   ) {

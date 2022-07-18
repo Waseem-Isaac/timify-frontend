@@ -39,7 +39,10 @@
             "styles": [
               "src/main.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "lodash", "moment"
+            ]
           },
           "configurations": {
             "production": {
@@ -165,6 +168,5 @@
         }
       }
     }
-  },
-  "defaultProject": "timify"
+  }
 }
