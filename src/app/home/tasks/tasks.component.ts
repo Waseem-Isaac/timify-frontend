@@ -18,4 +18,7 @@ export class TasksComponent {
   onTaskDeleted(taskId: string){
     this.taskDeleted$.next(taskId)
   }
+
+  identifyer = (index:number, item: any) => item.name;
+
 }

@@ -14,11 +14,15 @@ export interface Task {
         seconds: number,
         year?: number
     };
+
+    tasks?: Task[],
+    finishedTasks?: boolean
 }
 
 export interface CategoizedTaskPerDay {
     day: string,
-    tasks: Task[]
+    tasks: Task[],
+    finishedTasks?: boolean
 }
 
 export interface User {

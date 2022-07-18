@@ -89,7 +89,12 @@ export class HomeComponent implements OnInit {
       
     this.categorizedTasks = (
       _(tasks).groupBy('day')
-      .map((tasks, day) => ({ day, tasks, finishedTasks: tasks.some(t => !!t.endTime) }))
+      .map((tasks, day) => ({ 
+        day, 
+        tasks: _(tasks).groupBy('description').map((subTasks, description) => ({
+          description, tasks: subTasks.filter(t => !!t.endTime) , finishedTasks: subTasks.some(t => !!t.endTime) 
+        })).value() as Task[], 
+        finishedTasks: tasks.some(t => !!t.endTime) }))
       .value()
     );
   }

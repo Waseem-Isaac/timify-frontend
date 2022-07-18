@@ -13,9 +13,9 @@ export class TaskComponent {
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
 
-  play(){
+  play(task: Task){
     this.taskResumed$.next(this.tasksService.defineTask({
-      ...this.task,
+      ...task,
       // Will start a new sub-task from 0.
       startTime: new Date(),
       endTime: undefined,
@@ -23,7 +23,7 @@ export class TaskComponent {
     }))
   }
 
-  delete(){
-    this.taskDeleted$.next(this.task?._id as string)
+  delete(id: string){
+    this.taskDeleted$.next(id as string)
   }
 }

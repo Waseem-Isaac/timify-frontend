@@ -1,6 +1,12 @@
 @use '@angular/material' as mat;
 @import "src/theme/theme-variables";
 
+.subTask{
+    &.task {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
 .task{
     background-color: #fff;
 
@@ -43,3 +49,19 @@
         }
     }
 }   
+
+
+::ng-deep {
+    .mat-expansion-panel-header {
+        all: unset !important;
+        cursor: pointer !important;
+        transition: height 225ms cubic-bezier(0.4, 0, 0.2, 1) !important
+    }
+    
+    .mat-expansion-panel:not([class*=mat-elevation-z]){
+        all: unset
+    }
+    .mat-expansion-panel-body{
+        all: unset !important;
+    }
+}
