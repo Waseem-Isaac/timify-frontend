@@ -2,6 +2,9 @@
   "name": "timify",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "14.17.1"
+  },
   "scripts": {
     "ng": "ng",
     "build": "npm run write:env -s && ng build",
