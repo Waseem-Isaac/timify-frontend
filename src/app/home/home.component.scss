@@ -5,20 +5,3 @@
 .container {
   // padding: 0 .5em;  
 }
-
-.empty {
-  height: 80vh;
-  h4{
-      color: $color-grey;
-  }
-  .link {
-      color: mat-color($app-primary);
-      cursor: pointer;
-  }
-  mat-icon {
-    font-size: 50px;
-    height: 50px;
-    width: 50px;
-    color: $color-grey;
-  }
-}

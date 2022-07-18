@@ -5,15 +5,21 @@
     (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus">
   </app-add-task>
 
-  <div *ngIf="categorizedTasks?.length; else empty">
+  <div *ngIf="(categorizedTasks?.length); else loading">
     <app-tasks (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" [tasks]="categorizedTasks"></app-tasks>   
   </div>
 
-  <ng-template #empty>
-    <div class="empty flex-m flex-c w-full">
-      <mat-icon class="m-r-5">error_outline</mat-icon>
-      <h4>No Tasks so far, <span class="link" (click)="focusAddTaskInput()">Create a new one ?</span></h4>
-    </div>
+  <ng-template #loading>
+    <div class="empty-block flex-m flex-c w-full">
+    <ng-container *ngIf="isLoading; else empty">
+      <mat-spinner  [diameter]="25"></mat-spinner>
+
+    </ng-container>
+    <ng-template #empty>
+        <mat-icon class="m-r-5">error_outline</mat-icon>
+        <h4>No Tasks so far, <span class="link" (click)="focusAddTaskInput()">Create a new one ?</span></h4>
+    </ng-template>
+  </div>
   </ng-template>
 
 </div>

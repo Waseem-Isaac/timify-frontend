@@ -1,10 +1,19 @@
 <div class="tasks">
-    <ng-container *ngFor="let task of tasks">
-        <div class="m-t-20 m-l-20 m-b-10">
-            {{task?.day}}
-        </div>
-        <div *ngFor="let task of task.tasks">
-            <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" [task]="task"></app-task>
-        </div>
-    </ng-container>
+    <div *ngFor="let task of tasks" class="dayTasks">
+        <ng-container *ngIf="task?.finishedTasks; else notFinishedTasks">
+            <div class="m-t-20 m-l-20 m-b-10">
+                <b>{{task?.day}}</b>
+            </div>
+            <div *ngFor="let task of task.tasks">
+                <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" [task]="task"></app-task>
+            </div>
+        </ng-container>
+    </div>
 </div> 
+
+<ng-template #notFinishedTasks>
+    <div class="empty-block flex-m flex-c w-full">
+        <mat-icon class="m-r-5">pause_circle_filled</mat-icon>
+        <h4>Once you stop your task, It will appear here</h4>
+    </div>    
+</ng-template>
