@@ -17,7 +17,12 @@
     </ng-container>
     <ng-template #empty>
         <mat-icon class="m-r-5">error_outline</mat-icon>
-        <h4>No Tasks so far, <span class="link" (click)="focusAddTaskInput()">Create a new one ?</span></h4>
+        <h4 *ngIf="serverErrMsg; else no_data">
+          {{serverErrMsg}}
+        </h4>
+        <ng-template #no_data> 
+          <h4>No Tasks so far, <span class="link" (click)="focusAddTaskInput()">Create a new one ?</span></h4>
+        </ng-template>
     </ng-template>
   </div>
   </ng-template>

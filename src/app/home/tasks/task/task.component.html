@@ -9,11 +9,10 @@
                 </h5>
               </mat-expansion-panel-header>
           
-
               <div class="additional-info task" *ngFor="let task of task.tasks">
                 <ng-container *ngIf="task?.endTime"> 
                   <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-                    <span class="badge">({{task?.tasks?.length}})</span> {{task?.description | truncate: [80, '...'] || '-'}}
+                    {{task?.description | truncate: [80, '...'] || '-'}}
                   </h5>
                   <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
                   <div class="time">
@@ -46,14 +45,9 @@
                 </ng-container>
                 
               </div>   
-
             </mat-expansion-panel>
-          </mat-accordion>
-             
+          </mat-accordion> 
       </div>
-     
-    <!-- </div> -->
-
   </ng-container>
 
   <ng-template #singleTask>
