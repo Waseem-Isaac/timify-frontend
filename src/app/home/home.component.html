@@ -6,7 +6,7 @@
   </app-add-task>
 
   <div *ngIf="(categorizedTasks?.length); else loading">
-    <app-tasks (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" [tasks]="categorizedTasks"></app-tasks>   
+    <app-tasks (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" (multipleTasksDeleted$)="onDeleteMultipleTasks($event)" [tasks]="categorizedTasks"></app-tasks>   
   </div>
 
   <ng-template #loading>

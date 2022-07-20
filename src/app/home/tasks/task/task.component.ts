@@ -12,8 +12,10 @@ export class TaskComponent {
   @Input() task!: Task;
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
+  @Output() multipleTasksDeleted$: EventEmitter<string[]> = new EventEmitter();
 
   play(task: Task){
+
     this.taskResumed$.next(this.tasksService.defineTask({
       ...task,
       // Will start a new sub-task from 0.
@@ -25,5 +27,10 @@ export class TaskComponent {
 
   delete(id: string){
     this.taskDeleted$.next(id as string)
+  }
+
+  deleteMultiple(tasks: Task[]){
+    const ids: string[] = tasks.map(t => t._id) as string[];
+    this.multipleTasksDeleted$.next(ids);
   }
 }

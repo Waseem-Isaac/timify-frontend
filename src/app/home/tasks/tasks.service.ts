@@ -49,6 +49,10 @@ export class TasksService {
     return this._http.delete('tasks/'+taskId)
   }
 
+  deleteMultipleTasks(ids: string[]){
+    return this._http.request('delete', 'tasks/bulk', { body : {ids}})
+  }
+
 
   // Add Project
   addProject(project: Project): Observable<Project>{
@@ -57,5 +61,14 @@ export class TasksService {
 
   getProjects(): Observable<Project[]>{
     return this._http.get<Project[]>('projects');
+  }
+
+  calculateOveralTaskPeriods(tasks :Task[]){
+    const totalDurations = tasks.slice(1).reduce((prev, cur) => {
+        return prev.add(cur.period);
+      },
+      moment.duration(tasks[0].period));
+
+   return(moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss"))
   }
 }

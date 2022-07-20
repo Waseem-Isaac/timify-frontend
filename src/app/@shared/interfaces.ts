@@ -8,7 +8,8 @@ export interface Task {
     period?: string,
 
     tasks?: Task[],
-    finishedTasks?: boolean
+    finishedTasks?: boolean,
+    overalPeriod?: string;
 }
 
 export interface CategoizedTaskPerDay {

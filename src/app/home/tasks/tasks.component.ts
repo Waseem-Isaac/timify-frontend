@@ -10,6 +10,7 @@ export class TasksComponent {
   @Input() tasks: Task[] = [];
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
+  @Output() multipleTasksDeleted$: EventEmitter<string[]> = new EventEmitter();
 
   onTaskResumed(task: any){
     this.taskResumed$.next(task)
@@ -17,6 +18,10 @@ export class TasksComponent {
   
   onTaskDeleted(taskId: string){
     this.taskDeleted$.next(taskId)
+  }
+  
+  onMultipleTasksDeleted(tasksIds: string[]){
+    this.multipleTasksDeleted$.next(tasksIds);
   }
 
   identifyer = (index:number, item: any) => item.name;

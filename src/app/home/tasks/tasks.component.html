@@ -5,7 +5,7 @@
                 <b>{{task?.day}}</b>
             </div>
             <div *ngFor="let task of task.tasks; trackBy: identifyer">
-                <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" [task]="task"></app-task>
+                <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)" (multipleTasksDeleted$)="onMultipleTasksDeleted($event)" [task]="task"></app-task>
             </div>
         </ng-container>
     </div>

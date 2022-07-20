@@ -97,6 +97,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  onDeleteMultipleTasks(tasksIds: string[]){
+    this.tasksService.deleteMultipleTasks(tasksIds).pipe().subscribe(res => {
+      
+      this.tasks = this.tasks.filter((t: any) => tasksIds.indexOf(t._id) < 0);
+      this.categroizeTasksPerDay(this.tasks);
+    })
+  }
+
   onAddProject(project: Project){
     this.tasksService.addProject(project).subscribe(res => {
     },err => console.log(err))
@@ -113,8 +121,11 @@ export class HomeComponent implements OnInit {
       _(tasks).groupBy('day')
       .map((tasks, day) => ({ 
         day, 
-        tasks: _(tasks).groupBy('description').map((subTasks, description) => ({
-          description, tasks: subTasks.filter(t => !!t.endTime) , finishedTasks: subTasks.some(t => !!t.endTime) 
+        tasks: _(tasks).groupBy('description').map((subTasks, description, overalPeriod) => ({
+          description, 
+          tasks: subTasks.filter(t => !!t.endTime) , 
+          finishedTasks: subTasks.some(t => !!t.endTime),
+          overalPeriod: this.tasksService.calculateOveralTaskPeriods(subTasks)
         })).value().reverse() as Task[], 
         finishedTasks: tasks.some(t => !!t.endTime) }))
       .value()
