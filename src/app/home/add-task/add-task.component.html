@@ -33,9 +33,7 @@
 
       </div>
       <div class="timer">
-        {{!isPlaying ? ' 0 : 0 : 0' : 
-        (isPlaying?.period?.hours + " : "+  isPlaying?.period?.minutes + " : " + isPlaying?.period?.seconds) 
-      }} 
+        {{!isPlaying ? ' 00:00:00' : (isPlaying.period) }} 
       </div>
       <div class="actions">
         <button *ngIf="!isPlaying; else is_playing" mat-flat-button class="start" (click)="start()"><mat-icon>play_arrow</mat-icon></button>

@@ -33,7 +33,7 @@ export class AddTaskComponent implements OnChanges{
       {
         description: this.description || '[No Description]',
         startTime: new Date(),
-        period: {hours: 0, minutes: 0, seconds: 0},
+        period: '00:00:00',
         endTime: undefined,
         project: this.project
       }

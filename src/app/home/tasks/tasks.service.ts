@@ -9,11 +9,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TasksService {
+  canPlayTask!: boolean; 
 
   constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
   calculateTaskPeriod(startTime: Date, endTime: Date = new Date()){
-    return moment.duration(Math.ceil(moment(endTime).diff(moment(startTime))))['_data'];
+    const start = moment(startTime);
+    const end   = moment(endTime);
+    const diff  = end.diff(start);
+    
+    return moment.utc(diff).format("HH:mm:ss")
   };
 
   defineTask(task?: Task): Task{
@@ -45,6 +50,10 @@ export class TasksService {
     return this._http.delete('tasks/'+taskId)
   }
 
+  deleteMultipleTasks(ids: string[]){
+    return this._http.request('delete', 'tasks/bulk', { body : {ids}})
+  }
+
 
   // Add Project
   addProject(project: Project): Observable<Project>{
@@ -53,5 +62,14 @@ export class TasksService {
 
   getProjects(): Observable<Project[]>{
     return this._http.get<Project[]>('projects');
+  }
+
+  calculateOveralTaskPeriods(tasks :Task[]){
+    const totalDurations = tasks.slice(1).reduce((prev, cur) => {
+        return prev.add(cur.period);
+      },
+      moment.duration(tasks[0].period));
+
+   return(moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss"))
   }
 }

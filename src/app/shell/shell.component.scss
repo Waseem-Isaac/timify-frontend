@@ -74,6 +74,7 @@ nav {
         height: 60px;
         .profile-img {
           width: 30px; height: 30px;
+            background-color: mat-color($app-primary, 100);
         }
       }
     }
@@ -115,4 +116,8 @@ button.switch-mode{
     z-index: 1;
     background: mat-color($app-primary);
     color: #fff;
+}
+
+.profile-img  {
+  background-color: mat-color($app-primary, 100);
 }
