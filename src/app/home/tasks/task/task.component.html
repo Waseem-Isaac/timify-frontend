@@ -6,11 +6,11 @@
               <mat-expansion-panel-header>
                 <div class="task parent-task">
                   <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-                    <span class="badge">({{task?.tasks?.length}})</span> {{task?.description | truncate: [80, '...'] || '-'}}
+                    <span class="tasks-count badge">{{task?.tasks?.length}}</span> {{task?.description | truncate: [80, '...'] || '-'}}
                   </h5>
   
                   <div class="additional-info">
-                    <!-- <p class="project badge">{{task?.project?.name || 'No Project'}}</p> -->
+                    <p class="project badge"></p>
                     <div class="time">
                       <div class="start-time">{{task?.tasks[0]?.startTime | date:"h:mm a"}}  </div>
                       <div class="end-time"> -{{task?.tasks[task?.tasks?.length-1]?.endTime| date:"h:mm a"}}</div>
