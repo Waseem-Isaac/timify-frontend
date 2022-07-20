@@ -1,38 +1,128 @@
-<div class="task" *ngIf="task?.endTime">
-    <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
+<ng-container *ngIf="task?.finishedTasks">
+  <ng-container *ngIf="!!(task?.tasks?.length > 1);else singleTask; ">
+        <div class="subTask task">
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <div class="task parent-task">
+                  <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
+                    <span class="tasks-count badge">{{task?.tasks?.length}}</span> {{task?.description | truncate: [80, '...'] || '-'}}
+                  </h5>
+  
+                  <div class="additional-info">
+                    <p class="project badge"></p>
+                    <div class="time">
+                      <div class="start-time">{{task?.tasks[0]?.startTime | date:"h:mm a"}}  </div>
+                      <div class="end-time"> -{{task?.tasks[task?.tasks?.length-1]?.endTime| date:"h:mm a"}}</div>
+            
+                      <div class="period">{{task?.overalPeriod}}</div>
+                    </div>
+                    <div class="actions">
+                      <button mat-icon-button color="primary" (click)="play(task); $event.stopPropagation()">
+                        <mat-icon>play_arrow</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" [matMenuTriggerFor]="userMenu" (click)="$event.stopPropagation()">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+            
+                      <mat-menu #userMenu="matMenu">
+                        <mat-list>
+                          <mat-list-item>
+                            <button (click)="deleteMultiple(task.tasks);" mat-button color="warn" class="p-l-0 p-r-0">
+                              <mat-icon class="fs-20">delete_outline</mat-icon>
+                              <b>Delete All</b>
+                            </button>
+                          </mat-list-item>
+                        </mat-list>
+            
+                      </mat-menu>
+                    </div>
+                  </div>
+                </div>
+                
+
+
+              </mat-expansion-panel-header>
+          
+              <div class=" task" *ngFor="let task of task.tasks">
+                <ng-container *ngIf="task?.endTime"> 
+                  <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
+                    {{task?.description | truncate: [80, '...'] || '-'}}
+                  </h5>
+                  <div class="additional-info">
+                    <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
+                    <div class="time">
+                      <div class="start-time">{{task?.startTime | date:"h:mm a"}} </div>
+                      <div class="end-time"> - {{task?.endTime| date:"h:mm a"}}</div>
+            
+                      <div class="period">{{(task?.period)}}</div>
+                    </div>
+                    <div class="actions">
+                      <button mat-icon-button color="primary" (click)="play(task)">
+                        <mat-icon>play_arrow</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" [matMenuTriggerFor]="userMenu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+            
+                      <mat-menu #userMenu="matMenu">
+                        <mat-list>
+                          <mat-list-item>
+                            <button (click)="delete(task?._id);" mat-button color="warn" class="p-l-0 p-r-0">
+                              <mat-icon class="fs-20">delete_outline</mat-icon>
+                              <b>Delete</b>
+                            </button>
+                          </mat-list-item>
+                        </mat-list>
+            
+                      </mat-menu>
+                    </div>
+                  </div>
+                  
+                </ng-container>
+                
+              </div>   
+            </mat-expansion-panel>
+          </mat-accordion> 
+      </div>
+  </ng-container>
+
+  <ng-template #singleTask>
+    <div class="task">
+      <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
         {{task?.description | truncate: [80, '...'] || '-'}}
-    </h5>
-    
-    <div class="additional-info">
-        <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
+      </h5>
+      <div class="additional-info">
+        <p class="project badge">{{task?.tasks[0]?.project?.name || 'No Project'}}</p>
         <div class="time">
-            <div class="start-time">{{task?.startTime | date:"h:mm a"}}  </div> 
-            <div class="end-time"> - {{task?.endTime| date:"h:mm a"}}</div>
-    
-            <div class="period">{{(task?.period?.hours + ":"+  task?.period?.minutes + ":" + task?.period?.seconds)}}</div>
+          <div class="start-time">{{task?.tasks[0]?.startTime | date:"h:mm a"}} </div>
+          <div class="end-time"> - {{task?.tasks[0]?.endTime| date:"h:mm a"}}</div>
+
+          <div class="period">{{(task?.tasks[0]?.period)}}</div>
         </div>
         <div class="actions">
-            <button mat-icon-button color="primary" (click)="play()"><mat-icon>play_arrow</mat-icon></button>
-            <button mat-icon-button color="primary"  [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
-       
-              <mat-menu #userMenu="matMenu">
-                <mat-list>
-                  <mat-list-item>
-                    <button (click)="delete()" mat-button color="warn" class="p-l-0 p-r-0">
-                        <mat-icon class="fs-20">delete_outline</mat-icon>
-                        <b>Delete</b>
-                    </button>
+          <button mat-icon-button color="primary" (click)="play(task?.tasks[0])">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" [matMenuTriggerFor]="userMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
 
-                  </mat-list-item>
-                  <!-- <mat-divider></mat-divider> -->
-                </mat-list>
-                
-              </mat-menu>
-            
+          <mat-menu #userMenu="matMenu">
+            <mat-list>
+              <mat-list-item>
+                <button (click)="delete(task?.tasks[0]?._id)" mat-button color="warn" class="p-l-0 p-r-0">
+                  <mat-icon class="fs-20">delete_outline</mat-icon>
+                  <b>Delete</b>
+                </button>
 
-       
-       
+              </mat-list-item>
+            </mat-list>
+
+          </mat-menu>
         </div>
+      </div>
     </div>
-   
-</div>
+
+  </ng-template>
+</ng-container>
