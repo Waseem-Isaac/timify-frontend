@@ -39,12 +39,12 @@
             .period {
                 margin-inline-start: 10px;
                 padding:  5px;
-                background: mat.get-color-from-palette($app-primary, 100);
+                background: #f1f1f1;
                 // border-radius: 5px;
-                // color: #fff;
-                width: 70px;
+                // color:  mat.get-color-from-palette($app-primary);
+                width: 80px;
                 text-align: center;
-                // font-w
+                font-weight: 600;
             }
         }
     }

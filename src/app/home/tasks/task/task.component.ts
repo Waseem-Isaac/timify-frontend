@@ -19,7 +19,7 @@ export class TaskComponent {
       // Will start a new sub-task from 0.
       startTime: new Date(),
       endTime: undefined,
-      period: {hours: 0, minutes: 0, seconds: 0}
+      period: '00:00:00'
     }))
   }
 

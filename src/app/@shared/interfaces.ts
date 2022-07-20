@@ -5,15 +5,7 @@ export interface Task {
     endTime: any;
     user?: string;
     project: Project | null;
-    period?: {
-        days?: number,
-        hours: number,
-        // milliseconds: 18,
-        minutes: number,
-        months?: number,
-        seconds: number,
-        year?: number
-    };
+    period?: string,
 
     tasks?: Task[],
     finishedTasks?: boolean

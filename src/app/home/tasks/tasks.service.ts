@@ -13,7 +13,11 @@ export class TasksService {
   constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
   calculateTaskPeriod(startTime: Date, endTime: Date = new Date()){
-    return moment.duration(Math.ceil(moment(endTime).diff(moment(startTime))))['_data'];
+    const start = moment(startTime);
+    const end   = moment(endTime);
+    const diff  = end.diff(start);
+    
+    return moment.utc(diff).format("HH:mm:ss")
   };
 
   defineTask(task?: Task): Task{
