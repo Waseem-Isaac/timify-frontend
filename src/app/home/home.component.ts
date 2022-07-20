@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
   onStopTask(task: any){
     this.tasksService.stopTask(task).pipe().subscribe(res => {
       this.isPlaying = null;
+      this.tasksService.canPlayTask = !!this.isPlaying;
       clearInterval(this.periodInterval);
 
       // on stop task .. appned the it into the tasks list.
@@ -138,6 +139,8 @@ export class HomeComponent implements OnInit {
     }, 1000)
 
     this.isPlaying = task;
+    this.tasksService.canPlayTask = !!this.isPlaying;
+
   }
 
   focusAddTaskInput(){

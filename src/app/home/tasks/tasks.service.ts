@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TasksService {
+  canPlayTask!: boolean; 
 
   constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
