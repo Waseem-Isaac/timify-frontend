@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
       // Detect the in-progress task to be continued.
       const inProgressTask = res.find(t => !t.endTime);
       inProgressTask && this.playTask(inProgressTask);
+      this.tasksService.canPlayTask = !!inProgressTask;
     }, err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }
 
