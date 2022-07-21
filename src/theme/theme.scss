@@ -75,6 +75,10 @@ body{
 }
 
 .profile-img {
+  &.xs{
+    width: 30px;
+    height: 30px;
+  }
   &.sm{
     width: 50px;
     height: 50px;
@@ -87,6 +91,8 @@ body{
   object-position: 20% 10%;
   border: 2px solid #fff;
   border-radius: 50%;
+  background-color: mat-color($app-primary, 100);
+
 }
 
 .empty-block {
