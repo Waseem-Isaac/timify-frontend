@@ -21,7 +21,7 @@
         <div class="row">
 
             <div class="picture">
-                <img [src]="member?.picture" class="profile-img sm" alt="">
+                <img [src]="member?.picture" class="profile-img xs" alt="">
             </div>
 
             <div class="email">
@@ -32,7 +32,7 @@
                 {{member?.username}}
             </div>
 
-            <div class="tasks" ></div>
+            <div class="tasks" ><b class="badge">{{member?.tasksCount}}</b></div>
         </div>
     </div>
 </div>

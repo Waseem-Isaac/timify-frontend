@@ -44,7 +44,7 @@
 
               </mat-expansion-panel-header>
           
-              <div class=" task" *ngFor="let task of task.tasks">
+              <div class="task child-task" *ngFor="let task of task.tasks">
                 <ng-container *ngIf="task?.endTime"> 
                   <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
                     {{task?.description | truncate: [80, '...'] || '-'}}
