@@ -17,8 +17,10 @@ export class TasksService {
     const start = moment(startTime);
     const end   = moment(endTime);
     const diff  = end.diff(start);
-    
-    return moment.utc(diff).format("HH:mm:ss")
+    return (
+        moment.utc(diff).date() > 1 ? 'Since ' + moment.duration(diff).humanize() :
+        moment.utc(diff).format("HH:mm:ss") 
+      )
   };
 
   defineTask(task?: Task): Task{
