@@ -14,8 +14,4 @@ export class TeamService {
   getTeam(): Observable<RegisterContext[]>{
     return this._http.get<RegisterContext[]>('users')
   }
-
-  getMemberTasksNumber(userId: string){
-    return this._http.get<RegisterContext[]>('tasks/user/'+userId)
-  }
 }
