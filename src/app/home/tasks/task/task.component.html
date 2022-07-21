@@ -12,8 +12,8 @@
                   <div class="additional-info">
                     <p class="project badge"></p>
                     <div class="time">
-                      <div class="start-time">{{task?.tasks[0]?.startTime | date:"h:mm a"}}  </div>
-                      <div class="end-time"> -{{task?.tasks[task?.tasks?.length-1]?.endTime| date:"h:mm a"}}</div>
+                      <div class="start-time">{{task?.tasks[0]?.startTime | date:"hh:mm a"}}  </div>
+                      <div class="end-time"> -{{task?.tasks[task?.tasks?.length-1]?.endTime| date:"hh:mm a"}}</div>
             
                       <div class="period">{{task?.overalPeriod}}</div>
                     </div>
@@ -52,8 +52,8 @@
                   <div class="additional-info">
                     <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
                     <div class="time">
-                      <div class="start-time">{{task?.startTime | date:"h:mm a"}} </div>
-                      <div class="end-time"> - {{task?.endTime| date:"h:mm a"}}</div>
+                      <div class="start-time">{{task?.startTime | date:"hh:mm a"}} </div>
+                      <div class="end-time"> - {{task?.endTime| date:"hh:mm a"}}</div>
             
                       <div class="period">{{(task?.period)}}</div>
                     </div>
@@ -95,8 +95,8 @@
       <div class="additional-info">
         <p class="project badge">{{task?.tasks[0]?.project?.name || 'No Project'}}</p>
         <div class="time">
-          <div class="start-time">{{task?.tasks[0]?.startTime | date:"h:mm a"}} </div>
-          <div class="end-time"> - {{task?.tasks[0]?.endTime| date:"h:mm a"}}</div>
+          <div class="start-time">{{task?.tasks[0]?.startTime | date:"hh:mm a"}} </div>
+          <div class="end-time"> - {{task?.tasks[0]?.endTime| date:"hh:mm a"}}</div>
 
           <div class="period">{{(task?.tasks[0]?.period)}}</div>
         </div>
