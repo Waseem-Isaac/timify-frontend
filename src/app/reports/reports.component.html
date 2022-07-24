@@ -1,11 +1,62 @@
 <div class="container">
-  <mat-card>
-    <h1>
-      <mat-card-title>Reports</mat-card-title>
-    </h1>
-    <mat-card-content>
-      <mat-icon>code</mat-icon>
-      <span>Version</span> {{ version }}
-    </mat-card-content>
-  </mat-card>
-</div>
+
+    <div class="page-header">
+        <div class="title">Reports</div>
+
+        <div class="additonal-info">
+            <mat-button-toggle-group name="reportPerWhat" aria-label="ReportPerWhat"  [(ngModel)]="reportPerWhat">
+                <mat-button-toggle value="tasks">Tasks</mat-button-toggle>
+                <mat-button-toggle value="team">Team</mat-button-toggle>
+                <mat-button-toggle value="projects">Project</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    
+    <div class="page-content">
+        <div class="row table-header">
+            <div class="picture">
+                Description
+            </div>
+    
+            <div class="username">
+                Username
+            </div>
+
+            <div class="email">
+                Project
+            </div>
+    
+            <div class="username">
+                Start Date
+            </div>
+    
+            <div class="tasks">Period</div>
+        </div>
+        <div *ngFor="let task of (tasks$ | async)">
+            <div class="row">
+    
+                <div class="description">
+                    {{task?.description}}
+                </div>
+    
+                <div class="username">
+                    {{task?.user?.username}}
+                </div>
+
+                <div class="Project">
+                    {{task?.project?.name || 'No Project'}}
+                </div>
+    
+                <div class="username">
+                    {{task?.startTime | date:"short"}}
+                </div>
+
+                <div class="username">
+                    {{task?.period}}
+                </div>
+    
+                <!-- <div class="tasks" ><b class="badge">z</b></div> -->
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,8 +1,59 @@
-.container {
-  text-align: center;
-  padding: 1rem;
+@use '@angular/material' as mat;
+@import "src/theme/theme-variables";
+
+.mat-button-toggle {
+ width: 100px;
 }
 
-.mat-icon {
-  vertical-align: middle;
+.mat-button-toggle-checked {
+  background-color: mat-color($app-primary);
+  color: mat-color($app-primary, default-contrast);
+}
+
+
+
+// Move the follwoing styles glabally
+.row{
+  background-color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  box-shadow: 1px 2px 2px 0px #f1f1f1;
+  padding: 10px 20px;    
+  margin: 1px 0;
+
+
+  >div {
+      display: flex; align-items: center;
+      width: 200px;
+  }
+
+  .badge {
+      width: 30px;
+      height: 30px;
+      background: mat-color($app-primary, 300);
+      // background-color: $color-primary-light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 12px;
+      color: #fff;
+  }
+}
+
+.table-header {
+  padding: 20px;
+
+  >div {
+      font-size: 11px;
+      font-weight: 600;
+      vertical-align: middle;
+      color:  mat-color($app-primary, 300);
+      cursor: default;
+      text-transform: uppercase;
+  }
+ 
 }

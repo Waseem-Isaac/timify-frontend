@@ -39,12 +39,23 @@ export class HomeComponent implements OnInit {
 
       // Category tasks per day.
       this.categroizeTasksPerDay(this.tasks);
-     
-      // Detect the in-progress task to be continued.
-      const inProgressTask = res.find(t => !t.endTime);
-      inProgressTask && this.playTask(inProgressTask);
-      this.tasksService.canPlayTask = !!inProgressTask;
+      this.handleInprogressTask(res);
+      
     }, err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
+  }
+
+  handleInprogressTask(res: Task[]){
+     // Detect the in-progress task to be continued.
+    //  If the task has been played for more than a day, then stop it. by the auto-stop of its day.
+     const inProgressTask = res.find(t => !t.endTime);
+     if(inProgressTask){      
+      if(this.tasksService.calculateTaskPeriod(inProgressTask.startTime).asObject['days']> 0){{
+        const endDate = new Date(inProgressTask.startTime).setHours(23, 59, 59);
+        return this.onStopTask(inProgressTask, new Date(endDate));
+      }}
+      return this.playTask(inProgressTask);
+     }
+     this.tasksService.canPlayTask = !inProgressTask;
   }
 
   onStartTask(task: any){
@@ -80,10 +91,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onStopTask(task: any){
+  onStopTask(task: Task, endTime: Date = new Date()){
+    task['endTime'] = endTime;
+    task['period'] = this.tasksService.calculateTaskPeriod(task?.startTime, task.endTime).asString;
+
     this.tasksService.stopTask(task).pipe().subscribe(res => {
       this.isPlaying = null;
-      this.tasksService.canPlayTask = !!this.isPlaying;
+      this.tasksService.canPlayTask = !this.isPlaying;
       clearInterval(this.periodInterval);
 
       // on stop task .. appned the it into the tasks list.
@@ -135,12 +149,14 @@ export class HomeComponent implements OnInit {
   }
 
   playTask(task: Task){
+    task['period'] = '00:00:00';
+
     this.periodInterval = setInterval(() => {
-      task['period'] = this.tasksService.calculateTaskPeriod(task?.startTime, task?.endTime  || new Date());
+      task['period'] = (this.tasksService.calculateTaskPeriod(task?.startTime, task?.endTime  || new Date())).asString;
     }, 1000)
 
     this.isPlaying = task;
-    this.tasksService.canPlayTask = !!this.isPlaying;
+    this.tasksService.canPlayTask = !this.isPlaying;
 
   }
 
