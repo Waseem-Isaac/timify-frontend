@@ -1,0 +1,37 @@
+<ng-container *ngIf="(projects?.length); else loading">
+    <div class="row table-header">
+        <div class="name">
+            name
+        </div>
+
+    </div>
+    <div *ngFor="let project of projects">
+        <div class="row">
+    
+            <div class="">
+                {{project?.name}}
+            </div>
+    
+        </div>
+    </div>
+
+</ng-container>
+
+
+<ng-template #loading>
+<div class="empty-block flex-m flex-c w-full">
+<ng-container *ngIf="isLoading; else empty">
+  <mat-spinner  [diameter]="25"></mat-spinner>
+
+</ng-container>
+<ng-template #empty>
+    <mat-icon class="m-r-5">error_outline</mat-icon>
+    <h4 *ngIf="serverErrMsg; else no_data">
+      {{serverErrMsg}}
+    </h4>
+    <ng-template #no_data> 
+      <h4>No data so far</h4>
+    </ng-template>
+</ng-template>
+</div>
+</ng-template>

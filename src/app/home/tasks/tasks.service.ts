@@ -13,14 +13,23 @@ export class TasksService {
 
   constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
-  calculateTaskPeriod(startTime: Date, endTime: Date = new Date()){
+  calculateTaskPeriod(startTime: Date, endTime: Date = new Date()): {asObject: any, asString: string}{
     const start = moment(startTime);
     const end   = moment(endTime);
     const diff  = end.diff(start);
-    return (
-        moment.utc(diff).date() > 1 ? 'Since ' + moment.duration(diff).humanize() :
-        moment.utc(diff).format("HH:mm:ss") 
-      )
+
+    if(moment.utc(diff).date() == 1){
+      return {
+        asObject: moment.duration(diff)['_data'],
+        asString: moment.utc(diff).format("HH:mm:ss")
+      } 
+    }
+    else {
+      return {
+        asObject: moment.duration(diff)['_data'],
+        asString: '00'+(moment.utc(diff).dayOfYear()-1) + ':'+ moment.utc(diff).format("HH:mm:ss")
+      } 
+    }
   };
 
   defineTask(task?: Task): Task{
@@ -66,11 +75,16 @@ export class TasksService {
     return this._http.get<Project[]>('projects');
   }
 
+  getAllTasks(): Observable<Task[]>{
+    return this._http.get<Task[]>('tasks/all');
+  }
+
   calculateOveralTaskPeriods(tasks :Task[]){
     const totalDurations = tasks.slice(1).reduce((prev, cur) => {
         return prev.add(cur.period);
       },
       moment.duration(tasks[0].period));
+
 
    return(moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss"))
   }

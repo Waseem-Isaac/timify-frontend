@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from '@app/@shared/interfaces';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,6 +13,7 @@ export class TasksComponent {
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
   @Output() multipleTasksDeleted$: EventEmitter<string[]> = new EventEmitter();
 
+  constructor(public tasksService: TasksService){}
   onTaskResumed(task: any){
     this.taskResumed$.next(task)
   }
