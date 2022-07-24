@@ -18,7 +18,7 @@ export class TaskComponent {
   constructor(public tasksService: TasksService, private _snackBar: MatSnackBar) { }
 
   play(task: Task){
-    if(this.tasksService.canPlayTask){
+    if(!this.tasksService.canPlayTask){
       this._snackBar.open('Please finish the currently playing task in order to play another one', 'Ok', {
         panelClass: ['custom-snackbar'],
         horizontalPosition: 'center',
