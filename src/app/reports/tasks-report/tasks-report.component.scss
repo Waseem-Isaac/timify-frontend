@@ -1,0 +1,9 @@
+:host{
+    .description {
+        width: 45% !important;
+    }
+
+    .row >div:not(.description){
+        max-width: 15%;
+    }
+}

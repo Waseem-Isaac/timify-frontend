@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Task } from '@app/@shared/interfaces';
 import { TasksService } from '@app/home/tasks/tasks.service';
 
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-reports',
@@ -12,30 +15,14 @@ import { Observable } from 'rxjs';
 })
 export class ReportsComponent implements OnInit {
   version: string | null = environment.version;
-  reportPerWhat: string = 'tasks';
-  tasks$: Observable<Task[]> = this.tasksService.getAllTasks();
+  reportPerWhat!: string;
 
-  constructor(private tasksService: TasksService) {}
+  constructor(private router: Router) {    
+    const onNavigationEnd = this.router.events.pipe(filter((event) => event instanceof NavigationEnd));
+    onNavigationEnd.subscribe(route => {
+      this.reportPerWhat = route['url'].split('/').pop();
+    })
+  }
 
   ngOnInit() {}
-
-  getTasks(){
-    // this.isLoading = true;
-
-    // this.tasksService.getTasks()
-    // .pipe(
-    //   finalize(() => this.isLoading = false)
-    // )
-    // .subscribe(res => {
-    //   this.tasks = res;
-
-    //   // Category tasks per day.
-    //   this.categroizeTasksPerDay(this.tasks);
-     
-    //   // Detect the in-progress task to be continued.
-    //   const inProgressTask = res.find(t => !t.endTime);
-    //   inProgressTask && this.playTask(inProgressTask);
-    //   this.tasksService.canPlayTask = !!inProgressTask;
-    // }, err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
-  }
 }

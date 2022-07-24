@@ -1,0 +1,64 @@
+<ng-container *ngIf="(tasks?.length); else loading">
+    <div class="row table-header">
+        <div class="description">
+            Description
+        </div>
+
+        <div class="">
+            Username
+        </div>
+
+        <div class="">
+            Project
+        </div>
+
+        <div class="">
+            Start Date
+        </div>
+
+        <div class="tasks">Period</div>
+    </div>
+    <div *ngFor="let task of (tasks)">
+        <div class="row">
+            <div class="description">
+                {{task?.description}}
+            </div>
+
+            <div class="">
+                {{task?.user?.username}}
+            </div>
+
+            <div class="">
+                {{task?.project?.name || 'No Project'}}
+            </div>
+
+            <div class="">
+                {{task?.startTime | date:"short"}}
+            </div>
+
+            <div class="">
+                {{task?.period}}
+            </div>
+
+            <!-- <div class="tasks" ><b class="badge">z</b></div> -->
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loading>
+    <div class="empty-block flex-m flex-c w-full">
+    <ng-container *ngIf="isLoading; else empty">
+      <mat-spinner  [diameter]="25"></mat-spinner>
+
+    </ng-container>
+    <ng-template #empty>
+        <mat-icon class="m-r-5">error_outline</mat-icon>
+        <h4 *ngIf="serverErrMsg; else no_data">
+          {{serverErrMsg}}
+        </h4>
+        <ng-template #no_data> 
+          <h4>No data so far</h4>
+        </ng-template>
+    </ng-template>
+  </div>
+  </ng-template>

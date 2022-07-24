@@ -1,62 +1,18 @@
 <div class="container">
 
     <div class="page-header">
-        <div class="title">Reports</div>
+        <div class="title">Reports Per <b>{{(reportPerWhat)}}</b></div>
 
         <div class="additonal-info">
-            <mat-button-toggle-group name="reportPerWhat" aria-label="ReportPerWhat"  [(ngModel)]="reportPerWhat">
-                <mat-button-toggle value="tasks">Tasks</mat-button-toggle>
-                <mat-button-toggle value="team">Team</mat-button-toggle>
-                <mat-button-toggle value="projects">Project</mat-button-toggle>
+            <mat-button-toggle-group name="reportPerWhat" aria-label="ReportPerWhat" >
+                <mat-button-toggle  [routerLink]="'tasks'" [routerLinkActive]="'mat-button-toggle-checked'">Tasks</mat-button-toggle>
+                <mat-button-toggle  [routerLink]="'team'"  [routerLinkActive]="'mat-button-toggle-checked'">Team</mat-button-toggle>
+                <mat-button-toggle  [routerLink]="'project'" [routerLinkActive]="'mat-button-toggle-checked'">Project</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
     </div>
     
     <div class="page-content">
-        <div class="row table-header">
-            <div class="picture">
-                Description
-            </div>
-    
-            <div class="username">
-                Username
-            </div>
-
-            <div class="email">
-                Project
-            </div>
-    
-            <div class="username">
-                Start Date
-            </div>
-    
-            <div class="tasks">Period</div>
-        </div>
-        <div *ngFor="let task of (tasks$ | async)">
-            <div class="row">
-    
-                <div class="description">
-                    {{task?.description}}
-                </div>
-    
-                <div class="username">
-                    {{task?.user?.username}}
-                </div>
-
-                <div class="Project">
-                    {{task?.project?.name || 'No Project'}}
-                </div>
-    
-                <div class="username">
-                    {{task?.startTime | date:"short"}}
-                </div>
-
-                <div class="username">
-                    {{task?.period}}
-                </div>
-    
-                <!-- <div class="tasks" ><b class="badge">z</b></div> -->
-            </div>
-        </div>
+        <router-outlet></router-outlet>
     </div>
     </div>
