@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterContext } from '@app/@shared/interfaces';
-import { TeamService } from '@app/team/team.service';
 import { finalize, map, Observable } from 'rxjs';
+import { ReportsService } from '../reports.service';
 
 @Component({
   selector: 'app-team-report',
@@ -14,14 +14,14 @@ export class TeamReportComponent implements OnInit {
 
   team: RegisterContext[] = [];
 
-  constructor(public teamService: TeamService) { }
+  constructor(public reportsService: ReportsService) { }
 
   ngOnInit(): void {
     this.getTeam()
   }
 
   getTeam(){
-    this.teamService.getTeam().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
+    this.reportsService.getTeam().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
       this.team = res;
     },err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }

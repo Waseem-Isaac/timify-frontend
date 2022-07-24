@@ -6,6 +6,7 @@ import { TasksService } from '@app/home/tasks/tasks.service';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { ReportsService } from './reports.service';
 
 
 @Component({
@@ -17,12 +18,15 @@ export class ReportsComponent implements OnInit {
   version: string | null = environment.version;
   reportPerWhat!: string;
 
-  constructor(private router: Router) {    
+  reportsCounts$: Observable<{tasks: number, projects: number, team: number}> = this.reportsService.countReports(); 
+
+  constructor(private router: Router, public reportsService: ReportsService) {    
     const onNavigationEnd = this.router.events.pipe(filter((event) => event instanceof NavigationEnd));
     onNavigationEnd.subscribe(route => {
-      this.reportPerWhat = route['url'].split('/').pop();
+      this.reportPerWhat = route['urlAfterRedirects'].split('/').pop();
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

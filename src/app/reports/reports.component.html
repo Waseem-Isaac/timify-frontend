@@ -2,17 +2,40 @@
 
     <div class="page-header">
         <div class="title">Reports Per <b>{{(reportPerWhat)}}</b></div>
-
-        <div class="additonal-info">
-            <mat-button-toggle-group name="reportPerWhat" aria-label="ReportPerWhat" >
-                <mat-button-toggle  [routerLink]="'tasks'" [routerLinkActive]="'mat-button-toggle-checked'">Tasks</mat-button-toggle>
-                <mat-button-toggle  [routerLink]="'team'"  [routerLinkActive]="'mat-button-toggle-checked'">Team</mat-button-toggle>
-                <mat-button-toggle  [routerLink]="'project'" [routerLinkActive]="'mat-button-toggle-checked'">Project</mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
     </div>
     
     <div class="page-content">
+        <div class="summary row" *ngIf="(reportsCounts$ | async) as count; else loading">
+            <div class="tasks count" [routerLink]="'tasks'" [routerLinkActive]="'active'">
+                <div>Tasks</div>
+                <span>{{count?.tasks}}</span>
+           </div>
+           <div class="team count" [routerLink]="'team'" [routerLinkActive]="'active'">
+                <div>Team</div>
+                <span>9</span>
+           </div>
+           <div class="projects count" [routerLink]="'project'" [routerLinkActive]="'active'">
+                <div>Projects</div>
+                <span>1</span>
+           </div>
+        </div>
+
+        <ng-template #loading> 
+            <div class="summary row">
+                <div class="tasks count" [routerLink]="'tasks'" [routerLinkActive]="'active'">
+                     <div>Tasks</div>
+                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
+                </div>
+                <div class="team count" [routerLink]="'team'" [routerLinkActive]="'active'">
+                     <div>Team</div>
+                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
+                </div>
+                <div class="projects count" [routerLink]="'project'" [routerLinkActive]="'active'">
+                     <div>Projects</div>
+                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
+                </div>
+             </div>
+        </ng-template>
         <router-outlet></router-outlet>
     </div>
     </div>

@@ -9,9 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { TasksReportComponent } from './tasks-report/tasks-report.component';
 import { TeamReportComponent } from './team-report/team-report.component';
 import { ProjectsReportComponent } from './projects-report/projects-report.component';
+import { SharedModule } from '@app/@shared';
 
 @NgModule({
-  imports: [CommonModule,  FormsModule,FlexLayoutModule, MaterialModule, ReportsRoutingModule],
+  imports: [CommonModule,  FormsModule,FlexLayoutModule, MaterialModule, SharedModule,ReportsRoutingModule],
   declarations: [ReportsComponent, TasksReportComponent, TeamReportComponent, ProjectsReportComponent],
 })
 export class ReportsModule {}
