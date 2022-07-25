@@ -1,7 +1,9 @@
 <div class="container">
 
     <div class="page-header">
-        <div class="title">Reports Per <b>{{(reportPerWhat)}}</b></div>
+        <div class="title">Reports Per <b>{{(reportPerWhat)}}</b> </div>
+        <div style="font-size: 20px"><b>(Module is in-progress yet.)</b></div>
+
     </div>
     
     <div class="page-content">
@@ -12,11 +14,11 @@
            </div>
            <div class="team count" [routerLink]="'team'" [routerLinkActive]="'active'">
                 <div>Team</div>
-                <span>9</span>
+                <span>{{count?.team}}</span>
            </div>
            <div class="projects count" [routerLink]="'project'" [routerLinkActive]="'active'">
                 <div>Projects</div>
-                <span>1</span>
+                <span>{{count?.projects}}</span>
            </div>
         </div>
 
