@@ -3,12 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
-import { UntilDestroy, untilDestroyed } from '@shared';
+// import { UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from '../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
-@UntilDestroy()
+// @UntilDestroy()
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
           this.registerForm.markAsPristine();
           this.isLoading = false;
         }),
-        untilDestroyed(this)
+        // untilDestroyed(this)
       )
       .subscribe(
         (res) => {

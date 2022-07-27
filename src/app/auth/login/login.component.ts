@@ -4,12 +4,12 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms
 import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { UntilDestroy, untilDestroyed } from '@shared';
+// import { UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from '../services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
-@UntilDestroy()
+// @UntilDestroy()
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.markAsPristine();
           this.isLoading = false;
         }),
-        untilDestroyed(this)
+        // untilDestroyed(this)
       )
       .subscribe(
         (credentials) => {
