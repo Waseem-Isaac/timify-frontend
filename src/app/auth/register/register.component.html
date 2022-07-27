@@ -18,7 +18,9 @@
 
               <ng-template #showImage>
                 <div class="uploaded-img">
-                  <img class="profile-img lg" *ngIf="this.registerForm.get('picture')?.value" [src]="this.registerForm.get('picture').value" alt="">
+                  <div class="profile-img-container lg">
+                    <img class="profile-img" *ngIf="this.registerForm.get('picture')?.value" [src]="this.registerForm.get('picture').value" alt="">
+                  </div>
                   <mat-icon (click)="this.registerForm.get('picture').setValue(null)">close</mat-icon>
                 </div>
                 

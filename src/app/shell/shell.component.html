@@ -38,13 +38,18 @@
 
       <div class="bottom-nav">
         <a class="profile hov-pointer" mat-list-item  [matMenuTriggerFor]="userMenu">
-          <img [src]="credentials?.picture" class="profile-img sm" width="40px" height="40px"  alt="">
+          <div class="profile-img-container sm">
+            <img [src]="credentials?.picture" class="profile-img" width="40px" height="40px"  alt="">
+          </div>
         </a>
      
         <mat-menu #userMenu="matMenu" class="top-menu">
           <mat-list>
             <mat-list-item>
-              <img [src]="credentials?.picture" class="profile-img sm" alt="">
+              <div class="profile-img-container sm">
+                <img [src]="credentials?.picture" class="profile-img" alt="">
+              </div>
+
               &nbsp;<b>{{ credentials?.email }}</b>
             </mat-list-item>
             <mat-divider></mat-divider>

@@ -36,6 +36,7 @@
         width: 50%;
 
         display: flex; align-items: center;
+        letter-spacing: 1px;
         .tasks-count.badge {
             margin-inline-end: 5px;
             background-color: mat-color($app-primary, 200);

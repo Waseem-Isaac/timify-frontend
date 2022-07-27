@@ -9,8 +9,7 @@
   box-sizing: border-box;
 }
 
-// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Open+Sans:wght@400&family=Roboto:wght@300&display=swap');html,
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500&family=Open+Sans:wght@400;500&family=Roboto:wght@400;500&family=Rubik:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Cairo:wght@600&family=Poppins:wght@200;300&display=swap');
 
 body{
   min-height: 100vh;
@@ -21,8 +20,9 @@ body{
 
   // font-family: 'Lato', sans-serif;
   // font-family: 'Roboto', sans-serif;
-  font-family: 'Open Sans', sans-serif !important;
-  // font-family: 'Rubik', sans-serif;
+  // font-family: 'Open Sans', sans-serif !important;
+  font-family: Poppins,Arial,sans-serif !important;
+  // font-family: 'Cairo', sans-serif;
 
   letter-spacing: 1.2px;;
   background-color: $body-bg;
@@ -76,7 +76,14 @@ body{
   }
 }
 
-.profile-img {
+.profile-img-container {
+  padding: 5px;
+  object-fit: cover;
+  object-position: 20% 10%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: mat-color($app-primary, 100);
+  display: flex; align-items: center; justify-content: center;
   &.xs{
     width: 30px;
     height: 30px;
@@ -89,12 +96,13 @@ body{
     width: 100px;
     height: 100px;
   }
-  object-fit: cover;
-  object-position: 20% 10%;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background-color: mat-color($app-primary, 100);
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 
+  }
+  
 }
 
 .empty-block {
