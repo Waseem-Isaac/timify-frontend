@@ -2,7 +2,7 @@
 
   <app-add-task 
     (taskStarted$)="onStartTask($event)" (taskStopped$)="onStopTask($event)"
-    (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus">
+    (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus" [projects]="projects">
   </app-add-task>
 
   <div *ngIf="(categorizedTasks?.length); else loading">

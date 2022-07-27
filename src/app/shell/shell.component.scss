@@ -11,73 +11,77 @@
 .mat-drawer-container{
   background-color: #fff;
   background-color: $body-bg;
-}
-.mat-sidenav {
-  min-width: var(--large-menu-width);
-  max-width: 28%;
 
-  .mat-toolbar{
-    margin: 20px 0 40px;
-    span {
-      font-weight: 700;
-    }
-    .logo{
-      margin-right: -10px;
-      
-    }
-  }
-
-  &.small{
-    min-width: var(--small-menu-width);
-  }
-}
-
-.has-border {
-  border-right: 1px solid $color-grey-overlay;
-}
-
-.mat-list {
-  padding-top: 0;
-}
-
-.mat-list-item {
-  text-decoration: none;
-}
-
-::ng-deep .top-menu .mat-list-base .mat-list-item,.top-menu .mat-list-base .mat-list-option{
-  height: 100px;
-}
-
-.menu-button {
-  margin-right: 1rem;
-}
-
-nav {
-  .list-items {
-    a{
-      font-size: 14px;
-      font-family: 'Open Sans', sans-serif;
-
-      border-inline: none;
-      mat-icon{
-        font-size: 17px;
+  .mat-sidenav {
+    width: var(--menu-width);
+    box-shadow: 0 0 1px;
+    // border-right: solid 1px rgba(0, 0, 0, 0.10);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    
+    .mat-toolbar{
+      padding: 0;
+      span {
+        font-weight: 700;
       }
-      
-      &.profile {
-        position: absolute;
-        bottom: 0;
-        cursor: pointer;
-        height: 60px;
-        .profile-img {
-          width: 30px; height: 30px;
-            background-color: mat-color($app-primary, 100);
+      .logo-container {
+        h1{
+          cursor: pointer;
+
+          font-family: 'Russo One',cursive;
+          background: #fff;
+          color: mat-color($app-primary);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 2.5rem;;
+        }
+      }
+      .logo{
+        width: 100%;
+      }
+    }
+
+    nav {
+      .list-items {
+        display: flex;
+        font-style: italic;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 10px;
+    
+        a{
+          font-size: 14px;
+          font-family: 'Open Sans', sans-serif;
+          text-decoration: none;
+    
+          border-inline: none;
+    
+          &.link{
+            width: 35px;
+            height: 35px;
+            background-color: #fff;
+            color: mat-color($app-primary);
+            border-radius: 50%;
+          }
+          
+          mat-icon{
+            font-size: 16px;
+            font-weight: 600;
+          }
         }
       }
     }
   }
 }
-
-
 
 
 .light{
@@ -100,7 +104,7 @@ nav {
     color: #fff;
   }
   mat-list a {
-    color: #fff;
+    // color: #fff;
   }
  } 
 }
@@ -114,6 +118,21 @@ button.switch-mode{
     color: #fff;
 }
 
-.profile-img  {
-  background-color: mat-color($app-primary, 100);
+//Overrides
+::ng-deep {
+  .mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; justify-content: space-between;
+    margin: 20px 0;
+  }
+  .top-menu .mat-list-base .mat-list-item,.top-menu .mat-list-base .mat-list-option{
+    height: 100px;
+  }
+  .mat-list-base .mat-list-item {
+    .mat-list-item-content{
+      padding: 0 10px !important;
+      justify-content: center;
+    }
+  } 
 }

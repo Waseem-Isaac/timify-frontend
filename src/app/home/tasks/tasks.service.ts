@@ -67,8 +67,8 @@ export class TasksService {
 
 
   // Add Project
-  addProject(project: Project): Observable<Project>{
-    return this._http.post<Project>('projects', project);
+  addProject(project: Project): Observable<{project: Project}>{
+    return this._http.post<{project: Project}>('projects', project);
   }
 
   getProjects(): Observable<Project[]>{

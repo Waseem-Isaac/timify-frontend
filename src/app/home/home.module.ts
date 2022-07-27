@@ -10,10 +10,9 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { FormsModule } from '@angular/forms';
-import { AddProjectDialogComponent } from './add-task/add-project-dialog/add-project-dialog.component';
 
 @NgModule({
   imports: [CommonModule, SharedModule, FlexLayoutModule, MaterialModule, FormsModule, HomeRoutingModule],
-  declarations: [HomeComponent, AddTaskComponent, TasksComponent, TaskComponent, AddProjectDialogComponent],
+  declarations: [HomeComponent, AddTaskComponent, TasksComponent, TaskComponent],
 })
 export class HomeModule {}

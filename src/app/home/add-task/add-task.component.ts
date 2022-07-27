@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Project, Task } from '@app/@shared/interfaces';
 import { Observable, of } from 'rxjs';
 import { TasksService } from '../tasks/tasks.service';
-import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 
 @Component({
   selector: 'app-add-task',
@@ -16,11 +15,14 @@ export class AddTaskComponent implements OnChanges{
   @Output() taskStopped$: EventEmitter<Task | any> = new EventEmitter();
   @Output() projectAdded$: EventEmitter<Project | any> = new EventEmitter();
   @Input() focus!: boolean;
-
-  projects$: Observable<Project[]> = this.tasksService.getProjects();
    
+  @Input() projects!: Project[];
+
   description: string = this.isPlaying?.description || '';
   project: Project | null = this.isPlaying?.project || null;
+
+  showAddProjectInput: boolean = false;
+
   constructor(public tasksService: TasksService, public dialog: MatDialog) { }
 
   ngOnChanges(): void {
@@ -51,18 +53,13 @@ export class AddTaskComponent implements OnChanges{
     }));
   }
 
-  addProject(){
-    // console.log('Create new project')
-    // this.projectAdded$.next({name: 'inital project'})
+  addProject(name: string){
+    this.projectAdded$.next({name})
+    this.showAddProjectInput = false;
+  }
 
-      const dialogRef = this.dialog.open(AddProjectDialogComponent, {
-        data: {project: this.project},
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        // this.project = result;
-        console.log(result)
-      });
+  openedChange(e: any){
+    console.log('CHANGED' , e);
+    
   }
 }

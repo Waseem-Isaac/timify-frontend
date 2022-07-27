@@ -7,63 +7,56 @@
       [opened]="true"
       [class.small]="isSmall"
       [disableClose]="true"
-      ngClass.gt-sm="has-border"
+      class="flex-m"
     >
-      <mat-toolbar>
-        <!-- <span>T</span>imify -->
-
-        <div *ngIf="!isSmall" class="flex-b">
-          <img [src]="isDarkMode ? '/assets/logo-white-2.png' : '/assets/logo.png'" class="logo" width="50px" height="30px" alt=""><span>imify</span>
-        </div>
-        <div fxFlex></div>
-        <div>
-         
-          
-
-          <button class="menu-toggler" mat-icon-button (click)="isSmall = !isSmall">
-            <mat-icon>{{ isSmall ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
-          </button>
-        </div>
-      </mat-toolbar>
-      <nav *ngIf="!isSmall">
-        <mat-list class="list-items">
-          <!-- <mat-divider></mat-divider> -->
-          <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="isSmall && sidenav.close()">
-            <!-- access_time -->
-           <mat-icon class="flex-m">access_time</mat-icon> <span >Home</span>
-          </a>
-          <a mat-list-item routerLink="/reports" routerLinkActive="active" (click)="isSmall && sidenav.close()">
-           <mat-icon class="flex-m">list_alt</mat-icon> <span >Reports</span>
-          </a>
+      <div class="top-nav">
+        <mat-toolbar class="flex-c m-b-50">
+          <div class="flex-b logo-container">
+            <h1 [routerLink]="['/']">T</h1>
+            <!-- <img [src]="'/assets/logo.png'" class="logo" width="50px" height="30px" alt="">     -->
+          </div>
+        </mat-toolbar>
+  
+        <nav>
+          <mat-list class="list-items">
+            <!-- <mat-divider></mat-divider> -->
+            <a mat-list-item routerLink="/home" class="link" routerLinkActive="active"  [matTooltip]="'Timer'"  [matTooltipPosition]="'right'">
+              <!-- access_time -->
+             <mat-icon class="flex-m flex-c">access_time</mat-icon>
+            </a>
+            <a mat-list-item routerLink="/reports" class="link" routerLinkActive="active"  [matTooltip]="'Reports'"  [matTooltipPosition]="'right'">
+             <mat-icon class="flex-m flex-c">list_alt</mat-icon> 
+            </a>
     
-
-          <a class="profile" mat-list-item  [matMenuTriggerFor]="userMenu">
-            <!-- <mat-icon class="flex-m">person</mat-icon> -->
-            <img [src]="credentials?.picture" class="profile-img sm m-r-5" width="40px" height="40px"  alt="">
-            <span >Me</span>
-          </a>
-          <mat-menu #userMenu="matMenu" class="top-menu">
-            <mat-list>
-              <mat-list-item>
-                <img [src]="credentials?.picture" class="profile-img sm" alt="">
-                &nbsp;<b>{{ credentials?.email }}</b>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-            </mat-list>
-            <button mat-menu-item (click)="logout()" >Logout</button>
-          </mat-menu>
-        </mat-list>
-
-
-
-
-
-
+          </mat-list>
+        </nav>
+      </div>
      
 
-      </nav>
+      <div class="bottom-nav">
+        <a class="profile hov-pointer" mat-list-item  [matMenuTriggerFor]="userMenu">
+          <div class="profile-img-container sm">
+            <img [src]="credentials?.picture" class="profile-img" width="40px" height="40px"  alt="">
+          </div>
+        </a>
+     
+        <mat-menu #userMenu="matMenu" class="top-menu">
+          <mat-list>
+            <mat-list-item>
+              <div class="profile-img-container sm">
+                <img [src]="credentials?.picture" class="profile-img" alt="">
+              </div>
+
+              &nbsp;<b>{{ credentials?.email }}</b>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+          <button mat-menu-item (click)="logout()" >Logout</button>
+        </mat-menu>
+      </div>
+
     </mat-sidenav>
-    <mat-sidenav-content [ngStyle]="{'margin-left': isSmall ? 'var(--small-menu-width)'  : 'var(--large-menu-width)'}">
+    <mat-sidenav-content [ngStyle]="{'margin-left': 'var(--menu-width)'}">
       <!-- <mat-toolbar color="primary" class="mat-elevation-z6">
         <button class="menu-button" mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
           <mat-icon>menu</mat-icon>

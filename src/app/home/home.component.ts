@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CategoizedTaskPerDay, Project, Task } from '@app/@shared/interfaces';
-import { concatMap, finalize } from 'rxjs';
+import { concatMap, finalize, Observable } from 'rxjs';
 import { TasksService } from './tasks/tasks.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -22,11 +22,13 @@ export class HomeComponent implements OnInit {
 
   periodInterval: any;
   serverErrMsg!: string;
+  projects: Project[]= [];
 
   constructor(private tasksService: TasksService) {}
 
   ngOnInit() {
     this.getTasks();
+    this.getProjects();
   }
 
   getTasks(){
@@ -42,6 +44,12 @@ export class HomeComponent implements OnInit {
       this.handleInprogressTask(res);
       
     }, err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
+  }
+
+  getProjects(){
+    this.tasksService.getProjects().subscribe(res => {
+      this.projects = res;
+    }, err => console.log(err))
   }
 
   handleInprogressTask(res: Task[]){
@@ -123,6 +131,7 @@ export class HomeComponent implements OnInit {
 
   onAddProject(project: Project){
     this.tasksService.addProject(project).subscribe(res => {
+      this.projects.push(res?.project);
     },err => console.log(err))
   }
 
