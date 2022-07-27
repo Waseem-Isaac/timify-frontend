@@ -48,11 +48,54 @@
             }
           }
 
+          &.manual{
+            width: 45%;
+          }
 
          
         }
+
+        .actions {
+          display: flex; gap: 10px; align-items: center;
+          .mat-button-toggle-group {
+            height: 45px;
+            border-radius: 0;
+
+            .mat-button-toggle{
+              height: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: mat-color($app-primary);
+              
+
+              mat-icon{
+                font-size: 14px;
+                display: flex; align-items: center; justify-content: center;
+              }
+
+              ::ng-deep {
+                .mat-button-toggle-label-content {
+                  padding: 0 0;
+                }
+              }
+            }
+            .mat-button-toggle-checked{
+              background-color: mat-color($app-primary);
+              color: #fff !important;
+
+              &.mat-button-toggle-disabled {
+                background-color: $color-disabled;
+                cursor: not-allowed;
+              }
+            }
+
+            
+          }
+        }
       } 
 }
+
 
 
 ::ng-deep {

@@ -22,6 +22,7 @@ export class AddTaskComponent implements OnChanges{
   project: Project | null = this.isPlaying?.project || null;
 
   showAddProjectInput: boolean = false;
+  mode: 'timer' | 'manual' = 'timer';
 
   constructor(public tasksService: TasksService, public dialog: MatDialog) { }
 
@@ -58,8 +59,13 @@ export class AddTaskComponent implements OnChanges{
     this.showAddProjectInput = false;
   }
 
-  openedChange(e: any){
-    console.log('CHANGED' , e);
-    
+  onModeChange(selectedMode: 'timer' | 'manual'){
+    console.log(selectedMode);
+    this.mode = selectedMode
   }
+
+  manualAdd(){
+    alert('Work inporgress yet')    
+  }
+  
 }
