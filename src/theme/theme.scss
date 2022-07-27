@@ -27,8 +27,7 @@ body{
   letter-spacing: 1.2px;;
   background-color: $body-bg;
 
-  --large-menu-width: 160px;
-  --small-menu-width: 73px;
+  --menu-width: 65px;
 }
 
 
@@ -125,12 +124,13 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.10);
+
     min-height: $page-header-height;
 
     position: fixed;
     // todo- handle both - large-small menu - move page header to shell component, or store menu status at a shared service.
-    width: calc(100% - var(--large-menu-width));
+    width: calc(100% - var(--menu-width));
   }
   .page-content {
     padding-top: calc($page-header-height + 10px);
