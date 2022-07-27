@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Cairo:wght@600&family=Poppins:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Cairo:wght@600&family=Poppins:wght@200;300&family=Russo+One&display=swap');
 
 body{
   min-height: 100vh;
@@ -89,8 +89,8 @@ body{
     height: 30px;
   }
   &.sm{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
   &.lg{
     width: 100px;
