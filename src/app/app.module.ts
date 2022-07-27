@@ -15,11 +15,14 @@ import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './@shared/http/auth.interceptor';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   imports: [
     BrowserModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+    NgxMatTimepickerModule,
+    NgxMatDatetimePickerModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
