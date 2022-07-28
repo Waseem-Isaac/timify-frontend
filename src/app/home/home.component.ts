@@ -131,6 +131,16 @@ export class HomeComponent implements OnInit {
       this.categroizeTasksPerDay(this.tasks);
     })
   }
+  
+  onEditTask(value: any){    
+    // Stop task function calls /PUT request.
+    // Todo: seprate both functions (edit/stop).
+    this.tasksService.stopTask(value).pipe().subscribe(res => {
+      this.updateTasks(this.tasks, res['task'])
+      this.categroizeTasksPerDay(this.tasks);
+    })
+  }
+  
 
   onDeleteTask(taskId: string){
     this.tasksService.deleteTask(taskId).pipe().subscribe(res => {
