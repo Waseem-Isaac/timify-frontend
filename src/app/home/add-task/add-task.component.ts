@@ -13,6 +13,7 @@ export class AddTaskComponent implements OnChanges{
   @Input() isPlaying!: Task;
   @Output() taskStarted$: EventEmitter<Task> = new EventEmitter();
   @Output() taskStopped$: EventEmitter<Task | any> = new EventEmitter();
+  @Output() taskAddedManually$: EventEmitter<Task | any> = new EventEmitter();
   @Output() projectAdded$: EventEmitter<Project | any> = new EventEmitter();
   @Input() focus!: boolean;
    
@@ -23,10 +24,13 @@ export class AddTaskComponent implements OnChanges{
 
   showAddProjectInput: boolean = false;
   mode: 'timer' | 'manual' = 'timer';
+  
+  manualTimeStart: Date = new Date()
+  manualTimeEnd: Date = new Date()
 
   constructor(public tasksService: TasksService, public dialog: MatDialog) { }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.description = this.isPlaying?.description; 
     this.project = this.isPlaying?.project; 
   }
@@ -48,7 +52,7 @@ export class AddTaskComponent implements OnChanges{
     this.taskStopped$.next(this.tasksService.defineTask({
       ...this.isPlaying,
       period: this.isPlaying.period,
-      description: this.description, 
+      description: this.description || '[No Description]', 
       project: this.project,
       endTime: new Date()
     }));
@@ -60,12 +64,27 @@ export class AddTaskComponent implements OnChanges{
   }
 
   onModeChange(selectedMode: 'timer' | 'manual'){
-    console.log(selectedMode);
     this.mode = selectedMode
   }
 
   manualAdd(){
-    alert('Work inporgress yet')    
+    this.taskAddedManually$.next(this.tasksService.defineTask({
+      description: this.description || '[No Description]', 
+      period: this.tasksService.calculateTaskPeriod(this.manualTimeStart, this.manualTimeEnd).asString,
+      project: this.project,
+      startTime: this.manualTimeStart,
+      endTime: this.manualTimeEnd
+    }))
+
+    this.resetMode(); // reset mode.
   }
   
+
+  resetMode(){
+    this.mode = 'timer';
+    this.manualTimeStart = new Date()
+    this.manualTimeEnd = new Date();
+    this.description = '';
+    this.project = null
+  }
 }

@@ -44,8 +44,36 @@
         {{!isPlaying ? ' 00:00:00' : (isPlaying.period) }} 
       </div>
       <ng-template #manualTimes>
-        <div class="flex-c flex-m"> 
-          <code>(Work inprogess yet.)</code>
+        <div class="flex-sb flex-m manualTimeInputs"> 
+
+          <div class="flex-m">
+            <!-- <mat-form-field appearance="outline"> -->
+              <!-- <input matInput [ngxMatDatetimePicker]="start" placeholder="Start">
+              <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #start>
+                <ng-template>
+                  <span>OK</span>
+                </ng-template>
+              </ngx-mat-datetime-picker> -->
+              <ngx-mat-timepicker [showSeconds]="true" [enableMeridian]="true" [(ngModel)]="manualTimeStart"></ngx-mat-timepicker>
+            <!-- </mat-form-field> -->
+          </div>
+
+          <div class="flex-m">
+            <ngx-mat-timepicker [showSeconds]="true" [enableMeridian]="true" [(ngModel)]="manualTimeEnd"></ngx-mat-timepicker>
+
+            <!-- <mat-form-field> -->
+              <!-- <input matInput [ngxMatDatetimePicker]="end" placeholder="End">
+              <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #end>
+                <ng-template>
+                  <span>OK</span>
+                </ng-template>
+              </ngx-mat-datetime-picker> -->
+            <!-- </mat-form-field> -->
+          </div>
+
+
         </div>
       </ng-template>
       <!-- ========================== -->

@@ -24,6 +24,7 @@ export interface User {
 }
 
 export interface Project{
+    _id?: string,
     name: string;
 }
 

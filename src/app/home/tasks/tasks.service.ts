@@ -88,4 +88,8 @@ export class TasksService {
 
    return(moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss"))
   }
+
+  getProjectById(projects: Project[], id: string){
+    return projects?.find(p => p?._id == id);
+  }
 }

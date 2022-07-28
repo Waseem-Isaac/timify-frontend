@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   periodInterval: any;
   serverErrMsg!: string;
   projects: Project[]= [];
+  mode: 'timer' | 'manual' = 'timer';
 
   constructor(private tasksService: TasksService) {}
 
@@ -97,6 +98,23 @@ export class HomeComponent implements OnInit {
         this.categroizeTasksPerDay(this.tasks);
       })
     }
+  }
+
+  onAddTaskManually(task: Task){
+    this.tasksService.startTask(task).pipe().subscribe(res => {
+      const addedTask = res['task'];
+      this.isPlaying = null;      
+      this.tasksService.canPlayTask = !this.isPlaying;
+      clearInterval(this.periodInterval);
+
+      // on Add task manually .. appned the it into the tasks list.
+      const projectID= addedTask['project'];
+
+      addedTask['project'] = this.tasksService.getProjectById(this.projects, projectID);
+      this.updateTasks(this.tasks, addedTask)
+      this.categroizeTasksPerDay(this.tasks);
+     
+    })
   }
 
   onStopTask(task: Task, endTime: Date = new Date()){
