@@ -12,7 +12,7 @@
         border-bottom: solid 1px rgba(0, 0, 0, 0.10);
         // box-shadow:  0 1px 4px #f0f0f0;;
 
-        min-height: 70px;
+        min-height: 80px;
         #add_task_input{
           width: 70%;
           padding: 10px ;
@@ -27,11 +27,16 @@
           justify-content: space-between;
           align-items: center;
     
-          .start {
+          .start, .add {
             background-color:  mat.get-color-from-palette($app-primary);
             color: #fff;
             // border: 5px solid mat-color($app-primary,100);
             outline: 5px solid mat-color($app-primary,100);
+
+            border-radius: 0;
+            &:disabled{
+              background-color: $color-disabled;
+            }
           }
           .stop {
             outline: 5px solid mat-color($app-warn,100);
@@ -51,15 +56,14 @@
           &.manual{
             width: 45%;
           }
-
          
         }
 
         .actions {
           display: flex; gap: 10px; align-items: center;
           .mat-button-toggle-group {
-            height: 45px;
-            border-radius: 0;
+            height: 44px;
+            border-radius: 5px;
 
             .mat-button-toggle{
               height: 50%;
@@ -142,6 +146,25 @@
 
     
   }
+
+  .ngx-mat-timepicker-table {
+    .ngx-mat-timepicker-tbody{ 
+      // tr{
+      //   &:first-of-type, &:last-of-type{
+      //     display: none;
+      //   }
+      // }
+
+      
+      .mat-input-element {
+        font-weight: 600;
+        color: mat-color($app-primary);}
+      .mat-form-field-appearance-legacy .mat-form-field-underline { 
+          background-color: mat-color($app-primary);
+          height: 1px;
+      }
+    }
+  }
 }
 
 // .select-project {
@@ -214,4 +237,19 @@
     transform: scaleY(1);
     opacity: 1;
   }
+}
+
+
+
+// .mat-form-field-appearance-legacy .mat-form-field-infix border 1px solid #f0f0f0;
+// .mat-form-field-appearance-legacy .mat-form-field-underline depsloay none
+// .mat-form-field-appearance-legacy .mat-form-field-wrapper padding-bottom 0
+
+
+.datetime-container{
+  border: solid 1px rgba(0, 0, 0, 0.10);
+  margin: 0 10px;
+  padding: 0 9px;
+  width: 200px;
+  font-size: 14px;
 }
