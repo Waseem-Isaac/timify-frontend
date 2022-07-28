@@ -11,6 +11,8 @@ export class TasksComponent {
   @Input() tasks: Task[] = [];
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
+  @Output() taskEdited$: EventEmitter<any> = new EventEmitter();
+
   @Output() multipleTasksDeleted$: EventEmitter<string[]> = new EventEmitter();
 
   constructor(public tasksService: TasksService){}
@@ -20,6 +22,10 @@ export class TasksComponent {
   
   onTaskDeleted(taskId: string){
     this.taskDeleted$.next(taskId)
+  }
+
+  onTaskEdited(value: any){    
+    this.taskEdited$.next(value)
   }
   
   onMultipleTasksDeleted(tasksIds: string[]){

@@ -7,6 +7,9 @@
                 <div class="task parent-task">
                   <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
                     <span class="tasks-count badge">{{task?.tasks?.length}}</span> {{task?.description | truncate: [80, '...'] || '-'}}
+                    <!-- <span class="tasks-count badge">{{task?.tasks?.length}}</span>  -->
+                    <!-- <mat-icon class="m-r-5 edit"></mat-icon> -->
+                    <!-- <input matInput type="text" name="" id="" [value]="task?.description | truncate: [80, '...'] || '-'" #input (blur)="edit(task, {description: input.value})" (click)="$event.stopPropagation()"> -->
                   </h5>
   
                   <div class="additional-info">
@@ -47,7 +50,9 @@
               <div class="task child-task" *ngFor="let task of task.tasks">
                 <ng-container *ngIf="task?.endTime"> 
                   <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-                    {{task?.description | truncate: [80, '...'] || '-'}}
+                    <!-- {{task?.description | truncate: [80, '...'] || '-'}} -->
+                    <mat-icon class="m-r-5 edit"></mat-icon>
+                    <input matInput type="text" name="" id="" [value]="task?.description | truncate: [80, '...'] || '-'" #input (blur)="edit(task, {description: input.value})">
                   </h5>
                   <div class="additional-info">
                     <p class="project badge">{{task?.project?.name || 'No Project'}}</p>
@@ -86,11 +91,13 @@
           </mat-accordion> 
       </div>
   </ng-container>
-
   <ng-template #singleTask>
     <div class="task">
       <h5 [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-        {{task?.description | truncate: [80, '...'] || '-'}}
+        <!-- {{task?.description | truncate: [80, '...'] || '-'}} -->
+        <mat-icon class="m-r-5 edit"></mat-icon>
+        <input matInput type="text" name="" id="" [value]="task?.description | truncate: [80, '...'] || '-'" #input (blur)="edit(task?.tasks[0], {description: input.value})">
+
       </h5>
       <div class="additional-info">
         <p class="project badge">{{task?.tasks[0]?.project?.name || 'No Project'}}</p>

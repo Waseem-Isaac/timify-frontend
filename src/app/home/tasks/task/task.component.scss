@@ -38,7 +38,7 @@
         display: flex; align-items: center;
         letter-spacing: 1px;
         .tasks-count.badge {
-            margin-inline-end: 5px;
+            margin-inline-end: 10px;
             background-color: mat-color($app-primary, 200);
             color: #fff;
             border-radius: 50%;
@@ -49,6 +49,20 @@
             align-items: center;
             justify-content: center;
             font-size: 80%;
+        }
+
+        mat-icon.edit{
+            color: $color-grey;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            transition: .2s all ease;
+        }
+        &:hover{
+            mat-icon.edit{
+                // font-size: 17px;
+                color: mat-color($app-primary);
+            }
         }
     }
     .additional-info {
