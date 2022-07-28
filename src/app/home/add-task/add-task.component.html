@@ -46,31 +46,28 @@
       <ng-template #manualTimes>
         <div class="flex-sb flex-m manualTimeInputs"> 
 
-          <div class="flex-m">
-            <!-- <mat-form-field appearance="outline"> -->
-              <!-- <input matInput [ngxMatDatetimePicker]="start" placeholder="Start">
-              <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #start>
+          <div class="flex-m datetime-container">
+            <!-- <ngx-mat-timepicker [showSeconds]="true"  [showSpinners]="false" [enableMeridian]="true" [(ngModel)]="manualTimeStart"></ngx-mat-timepicker> -->
+
+              <input matInput [ngxMatDatetimePicker]="start" placeholder="Start" [(ngModel)]="manualTimeStart" (ngModelChange)="startDateChange()">
+              <mat-datepicker-toggle matSuffix [for]="start" ></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #start [enableMeridian]="true" [showSeconds]="true">
                 <ng-template>
                   <span>OK</span>
                 </ng-template>
-              </ngx-mat-datetime-picker> -->
-              <ngx-mat-timepicker [showSeconds]="true" [enableMeridian]="true" [(ngModel)]="manualTimeStart"></ngx-mat-timepicker>
-            <!-- </mat-form-field> -->
+              </ngx-mat-datetime-picker>
           </div>
 
-          <div class="flex-m">
-            <ngx-mat-timepicker [showSeconds]="true" [enableMeridian]="true" [(ngModel)]="manualTimeEnd"></ngx-mat-timepicker>
+          <div class="flex-m datetime-container">
+            <!-- <ngx-mat-timepicker [showSeconds]="true" [enableMeridian]="true" [(ngModel)]="manualTimeEnd"></ngx-mat-timepicker> -->
 
-            <!-- <mat-form-field> -->
-              <!-- <input matInput [ngxMatDatetimePicker]="end" placeholder="End">
+              <input matInput [ngxMatDatetimePicker]="end" placeholder="End"  [(ngModel)]="manualTimeEnd" [min]="manualTimeMin" [max]="manualTimeMax">
               <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #end>
+              <ngx-mat-datetime-picker #end [enableMeridian]="true" [showSeconds]="true">
                 <ng-template>
                   <span>OK</span>
                 </ng-template>
-              </ngx-mat-datetime-picker> -->
-            <!-- </mat-form-field> -->
+              </ngx-mat-datetime-picker>
           </div>
 
 
@@ -87,7 +84,7 @@
           </ng-template>
         </div>
         <ng-template #manual_add> 
-          <button mat-flat-button class="start" (click)="manualAdd()"><mat-icon>add</mat-icon></button>
+          <button mat-flat-button [disabled]="!manualTimeStart || !manualTimeEnd" class="add" (click)="manualAdd()"><mat-icon>add</mat-icon></button>
         </ng-template>
           
         <mat-button-toggle-group [disabled]="!!isPlaying" #group="matButtonToggleGroup" [vertical]="true" [value]="mode" (change)="onModeChange(group.value)">

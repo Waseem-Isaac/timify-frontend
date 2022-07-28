@@ -25,10 +25,22 @@ export class AddTaskComponent implements OnChanges{
   showAddProjectInput: boolean = false;
   mode: 'timer' | 'manual' = 'timer';
   
-  manualTimeStart: Date = new Date()
-  manualTimeEnd: Date = new Date()
+  manualTimeStart!: Date
+  manualTimeEnd!: Date 
 
-  constructor(public tasksService: TasksService, public dialog: MatDialog) { }
+  manualTimeMin = new Date()
+  manualTimeMax = new Date()
+
+  constructor(public tasksService: TasksService, public dialog: MatDialog) { 
+
+    
+  }
+
+  startDateChange(){
+    this.manualTimeMin = new Date(new Date(this.manualTimeStart));
+    this.manualTimeMax = new Date(new Date(this.manualTimeStart).setHours(23, 59, 59));
+    console.log(this.manualTimeMin, this.manualTimeMax)
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.description = this.isPlaying?.description; 
@@ -85,6 +97,9 @@ export class AddTaskComponent implements OnChanges{
     this.manualTimeStart = new Date()
     this.manualTimeEnd = new Date();
     this.description = '';
-    this.project = null
+    this.project = null;
+
+    this.manualTimeStart = null;
+    this.manualTimeEnd = null
   }
 }
