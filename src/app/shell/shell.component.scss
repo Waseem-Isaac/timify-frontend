@@ -32,11 +32,13 @@
           cursor: pointer;
 
           font-family: 'Russo One',cursive;
-          background: #fff;
-          color: mat-color($app-primary);
+          background:  mat-color($app-primary, 300);
+          color: #fff;
+          // background:  #fff;
+          // color: mat-color($app-primary);
           width: 50px;
           height: 50px;
-          border-radius: 50%;
+          border-radius: 5px;
           display: flex;
           justify-content: center;
           align-items: center;
