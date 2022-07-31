@@ -165,10 +165,15 @@ export class HomeComponent implements OnInit {
 
   // Helpers
   categroizeTasksPerDay(tasks: Task[]){    
-    tasks= tasks.map((task: Task) => { return { 
-      day: moment(task.endTime).diff(moment(), 'days') ?  moment(task.endTime).format('ddd, D MMM YYYY'): 'Today' ,
+    tasks= tasks.map((task: Task) => { 
+      return { 
+      day: moment(task.endTime).isSame(moment(), 'day') ? 'Today' : moment(task.endTime).format('ddd, D MMM YYYY'),
       ...task
-    } });
+    } }).sort(
+      (objA, objB) => {
+        return(Number(moment((objB.endTime))) - Number(moment((objA.endTime))))
+      },
+    );
       
     this.categorizedTasks = (
       _(tasks).groupBy('day')
@@ -176,13 +181,14 @@ export class HomeComponent implements OnInit {
         day, 
         tasks: _(tasks).groupBy('description').map((subTasks, description, overalPeriod) => ({
           description, 
-          tasks: subTasks.filter(t => !!t.endTime) , 
+          tasks: subTasks.filter(t => !!t.endTime), 
           finishedTasks: subTasks.some(t => !!t.endTime),
           overalPeriod: this.tasksService.calculateOveralTaskPeriods(subTasks)
-        })).value().reverse() as Task[], 
+        })).value() as Task[], 
         finishedTasks: tasks.some(t => !!t.endTime) }))
       .value()
     );
+
   }
 
   playTask(task: Task){
@@ -210,6 +216,6 @@ export class HomeComponent implements OnInit {
         return
       }
     }
-    tasks.unshift(task);
+    tasks.unshift(task)
   }
 }
