@@ -14,6 +14,7 @@ export class TaskComponent {
   @Output() taskResumed$: EventEmitter<Task> = new EventEmitter();
   @Output() taskDeleted$: EventEmitter<string> = new EventEmitter();
   @Output() taskEdited$: EventEmitter<any> = new EventEmitter();
+  @Output() multipleTasksEdited$: EventEmitter<any[]> = new EventEmitter();
 
   @Output() multipleTasksDeleted$: EventEmitter<string[]> = new EventEmitter();
 
@@ -47,21 +48,21 @@ export class TaskComponent {
   }
 
 
-  // todo.
+  // todo, Allow more values than the description.
   edit(task: Task, val: any){
-    
+    if(task.description === val['description']) return;
+
     // Logic for update single task.
     if(task?._id){
-      console.log('update this tasks directly by :', task._id);
+      task['loading']=true;      
       this.taskEdited$.next({_id: task._id, ...val});
     }
 
     // Logic for update multiple tasks.
     else {      
       if(task.tasks?.length){
-        alert('Feature in progress, Will update \r '+ this.task.tasks.map(t => [{_id: t._id, ...val}]))
-
-        console.log('Update bulk tasks', this.task.tasks.map(t => t._id));
+        task['loading']=true;  
+        this.multipleTasksEdited$.next(this.task.tasks.map(t => ({_id: t._id, ...val})))
       }
     }    
   }

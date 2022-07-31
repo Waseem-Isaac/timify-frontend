@@ -132,11 +132,21 @@ export class HomeComponent implements OnInit {
     })
   }
   
-  onEditTask(value: any){    
-    // Stop task function calls /PUT request.
-    // Todo: seprate both functions (edit/stop).
-    this.tasksService.stopTask(value).pipe().subscribe(res => {
+  onEditTask(value: any){        
+    this.tasksService.editTask(value).pipe(
+    ).subscribe(res => {
       this.updateTasks(this.tasks, res['task'])
+      this.categroizeTasksPerDay(this.tasks);
+    })
+  }
+
+  onEditMultipleTasks(value: any[]){
+    this.tasksService.editManyTasks(value).pipe(
+    ).subscribe((res) => {
+      value.forEach(t => {
+        this.updateTasks(this.tasks,t)
+      });
+      
       this.categroizeTasksPerDay(this.tasks);
     })
   }
@@ -212,10 +222,11 @@ export class HomeComponent implements OnInit {
   updateTasks(tasks: Task[], task: Task){
     for (let index = 0; index < tasks.length; index++) {
       if(tasks[index]._id === task._id){
-        tasks[index] = task;
+        tasks[index] = {...tasks[index], ...task};
         return
       }
     }
+
     tasks.unshift(task)
   }
 }

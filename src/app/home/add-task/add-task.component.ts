@@ -39,7 +39,6 @@ export class AddTaskComponent implements OnChanges{
   startDateChange(){
     this.manualTimeMin = new Date(new Date(this.manualTimeStart));
     this.manualTimeMax = new Date(new Date(this.manualTimeStart).setHours(23, 59, 59));
-    console.log(this.manualTimeMin, this.manualTimeMax)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

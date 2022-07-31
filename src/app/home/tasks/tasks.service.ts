@@ -57,6 +57,14 @@ export class TasksService {
     return this._http.put<{message: string, task: Task}>('tasks/'+task?._id, task);
   }
 
+  editTask(task: Task){
+    return this._http.put<{message: string, task: Task}>('tasks/'+task?._id, task);
+  }
+
+  editManyTasks(tasks: any[]){
+    return this._http.put<{message: string, task: Task}>('tasks', {tasks});
+  }
+
   deleteTask(taskId: string){
     return this._http.delete('tasks/'+taskId)
   }

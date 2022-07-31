@@ -8,6 +8,7 @@
                 <div *ngFor="let task of task.tasks; trackBy: identifyer">
                     <app-task (taskResumed$)="onTaskResumed($event)" (taskDeleted$)="onTaskDeleted($event)"
                         (taskEdited$)="onTaskEdited($event)"
+                        (multipleTasksEdited$)="onMultipleTasksEdited($event)"
                         (multipleTasksDeleted$)="onMultipleTasksDeleted($event)" [task]="task"></app-task>
                 </div>
             </div>

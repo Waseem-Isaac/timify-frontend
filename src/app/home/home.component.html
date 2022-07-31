@@ -8,8 +8,11 @@
 
   <div *ngIf="(categorizedTasks?.length); else loading">
     <app-tasks 
-    (taskEdited$)="onEditTask($event)"
-    (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" (multipleTasksDeleted$)="onDeleteMultipleTasks($event)" [tasks]="categorizedTasks"></app-tasks>   
+      (taskEdited$)="onEditTask($event)"
+      (multipleTasksEdited$)="onEditMultipleTasks($event)"
+      (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" (multipleTasksDeleted$)="onDeleteMultipleTasks($event)" [tasks]="categorizedTasks"
+
+    ></app-tasks>   
   </div>
 
   <ng-template #loading>
