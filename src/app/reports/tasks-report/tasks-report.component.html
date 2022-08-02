@@ -1,48 +1,64 @@
-<ng-container *ngIf="(tasks?.length); else loading">
-    <div class="row table-header">
-        <div class="description">
-            Description
+<ng-container *ngIf="(tasks?.length); else loading" >
+    <div
+        class="results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [horizontal]="false"
+        (scrolled)="onScroll()"
+        [scrollWindow]="false"
+        >
+        <div class="row table-header">
+            <div class="description">
+                Description
+            </div>
+
+            <div class="">
+                Username
+            </div>
+
+            <div class="">
+                Project
+            </div>
+
+            <div class="">
+                Start Date
+            </div>
+
+            <div class="tasks">Period</div>
+        </div>
+        <div *ngFor="let task of (tasks)">
+            <div class="row">
+                <div class="description" [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
+                    {{task?.description | truncate: [80, '...']}}
+                </div>
+
+                <div class="">
+                    {{task?.user?.username}}
+                </div>
+
+                <div class="">
+                    {{task?.project?.name || 'No Project'}}
+                </div>
+
+                <div class="">
+                    {{task?.startTime | date:"short"}}
+                </div>
+
+                <div class="">
+                    {{task?.period}}
+                </div>
+
+                <!-- <div class="tasks" ><b class="badge">z</b></div> -->
+            </div>
         </div>
 
-        <div class="">
-            Username
+        <div *ngIf="isLoading" class="p-t-20 p-b-20 flex-c flex-m">
+            <mat-spinner  [diameter]="25"></mat-spinner>
         </div>
-
-        <div class="">
-            Project
-        </div>
-
-        <div class="">
-            Start Date
-        </div>
-
-        <div class="tasks">Period</div>
     </div>
-    <div *ngFor="let task of (tasks)">
-        <div class="row">
-            <div class="description" [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-                {{task?.description | truncate: [80, '...']}}
-            </div>
-
-            <div class="">
-                {{task?.user?.username}}
-            </div>
-
-            <div class="">
-                {{task?.project?.name || 'No Project'}}
-            </div>
-
-            <div class="">
-                {{task?.startTime | date:"short"}}
-            </div>
-
-            <div class="">
-                {{task?.period}}
-            </div>
-
-            <!-- <div class="tasks" ><b class="badge">z</b></div> -->
-        </div>
-    </div>
+    
+    
 </ng-container>
 
 <ng-template #loading>

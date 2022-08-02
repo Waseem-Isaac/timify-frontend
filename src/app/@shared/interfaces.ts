@@ -40,3 +40,14 @@ export interface RegisterContext {
     password: string;
     picture?: string;
 }
+
+export interface PaginatedListResponse<T> {
+   pagination: Pagination,
+   data: T[]
+}
+
+export interface Pagination {
+    count?: number,
+    lastPage?: number,
+    [x: string]:any
+}

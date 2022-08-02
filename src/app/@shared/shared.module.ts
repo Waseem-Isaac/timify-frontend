@@ -7,7 +7,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { NgxMatMomentModule, NgxMatMomentAdapter, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NGX_MAT_DATE_FORMATS, NgxMatDateAdapter, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
-
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 export const CUSTOM_MOMENT_FORMATS  = {
   parse: {
@@ -29,7 +29,8 @@ export const CUSTOM_MOMENT_FORMATS  = {
     LoaderComponent, TruncatePipe,
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
-    NgxMatNativeDateModule
+    NgxMatNativeDateModule,
+    InfiniteScrollModule
   ],
 
   providers: [
