@@ -47,6 +47,7 @@ export interface PaginatedListResponse<T> {
 }
 
 export interface Pagination {
-    count: number,
-    lastPage: number
+    count?: number,
+    lastPage?: number,
+    [x: string]:any
 }

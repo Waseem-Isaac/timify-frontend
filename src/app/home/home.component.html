@@ -1,20 +1,22 @@
 <div class="container">
 
+  <!-- Add task input. -->
   <app-add-task 
     (taskStarted$)="onStartTask($event)" (taskStopped$)="onStopTask($event)"
     (taskAddedManually$)="onAddTaskManually($event)"
     (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus" [projects]="projects">
   </app-add-task>
 
+  <!-- Tasks list -->
   <div *ngIf="(categorizedTasks?.length); else loading">
     <app-tasks 
       (taskEdited$)="onEditTask($event)"
       (multipleTasksEdited$)="onEditMultipleTasks($event)"
       (taskResumed$)="onStartTask($event)" (taskDeleted$)="onDeleteTask($event)" (multipleTasksDeleted$)="onDeleteMultipleTasks($event)" [tasks]="categorizedTasks"
-
     ></app-tasks>   
   </div>
 
+  <!-- Loading placeholder -->
   <ng-template #loading>
     <div class="empty-block flex-m flex-c w-full">
     <ng-container *ngIf="isLoading; else empty">

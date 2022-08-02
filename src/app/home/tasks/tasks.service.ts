@@ -46,6 +46,9 @@ export class TasksService {
     }
   }
 
+  // getTasks(before: any): Observable<PaginatedListResponse<Task>>{
+  //   return this._http.get<PaginatedListResponse<Task>>(`tasks?before=${before}`);
+  // }
   getTasks(): Observable<Task[]>{
     return this._http.get<Task[]>('tasks');
   }

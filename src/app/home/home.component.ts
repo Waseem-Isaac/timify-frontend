@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoizedTaskPerDay, Project, Task } from '@app/@shared/interfaces';
-import { concatMap, finalize, Observable } from 'rxjs';
+import { concatMap, finalize } from 'rxjs';
 import { TasksService } from './tasks/tasks.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
     this.tasksService.getTasks().pipe(
       finalize(() => this.isLoading = false)
-    ).subscribe(res => {
+    ).subscribe(res => {      
       this.tasks = res;
 
       // Category tasks per day.
@@ -179,11 +179,7 @@ export class HomeComponent implements OnInit {
       return { 
       day: moment(task.endTime).isSame(moment(), 'day') ? 'Today' : moment(task.endTime).format('ddd, D MMM YYYY'),
       ...task
-    } }).sort(
-      (objA, objB) => {
-        return(Number(moment((objB.endTime))) - Number(moment((objA.endTime))))
-      },
-    );
+    } });
       
     this.categorizedTasks = (
       _(tasks).groupBy('day')
@@ -194,7 +190,12 @@ export class HomeComponent implements OnInit {
           tasks: subTasks.filter(t => !!t.endTime), 
           finishedTasks: subTasks.some(t => !!t.endTime),
           overalPeriod: this.tasksService.calculateOveralTaskPeriods(subTasks)
-        })).value() as Task[], 
+        }))
+        .sort(
+          (objA, objB) => {
+            return(Number(moment((objB.tasks[0]?.endTime))) - Number(moment((objA.tasks[0]?.endTime))))
+        })
+        .value() as Task[], 
         finishedTasks: tasks.some(t => !!t.endTime) }))
       .value()
     );
