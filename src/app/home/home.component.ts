@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoizedTaskPerDay, Project, Task } from '@app/@shared/interfaces';
-import { concatMap, finalize, Observable } from 'rxjs';
+import { concatMap, finalize } from 'rxjs';
 import { TasksService } from './tasks/tasks.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
     this.tasksService.getTasks().pipe(
       finalize(() => this.isLoading = false)
-    ).subscribe(res => {
+    ).subscribe(res => {      
       this.tasks = res;
 
       // Category tasks per day.
@@ -132,11 +132,21 @@ export class HomeComponent implements OnInit {
     })
   }
   
-  onEditTask(value: any){    
-    // Stop task function calls /PUT request.
-    // Todo: seprate both functions (edit/stop).
-    this.tasksService.stopTask(value).pipe().subscribe(res => {
+  onEditTask(value: any){        
+    this.tasksService.editTask(value).pipe(
+    ).subscribe(res => {
       this.updateTasks(this.tasks, res['task'])
+      this.categroizeTasksPerDay(this.tasks);
+    })
+  }
+
+  onEditMultipleTasks(value: any[]){
+    this.tasksService.editManyTasks(value).pipe(
+    ).subscribe((res) => {
+      value.forEach(t => {
+        this.updateTasks(this.tasks,t)
+      });
+      
       this.categroizeTasksPerDay(this.tasks);
     })
   }
@@ -165,8 +175,9 @@ export class HomeComponent implements OnInit {
 
   // Helpers
   categroizeTasksPerDay(tasks: Task[]){    
-    tasks= tasks.map((task: Task) => { return { 
-      day: moment(task.endTime).diff(moment(), 'days') ?  moment(task.endTime).format('ddd, D MMM YYYY'): 'Today' ,
+    tasks= tasks.map((task: Task) => { 
+      return { 
+      day: moment(task.endTime).isSame(moment(), 'day') ? 'Today' : moment(task.endTime).format('ddd, D MMM YYYY'),
       ...task
     } });
       
@@ -176,13 +187,19 @@ export class HomeComponent implements OnInit {
         day, 
         tasks: _(tasks).groupBy('description').map((subTasks, description, overalPeriod) => ({
           description, 
-          tasks: subTasks.filter(t => !!t.endTime) , 
+          tasks: subTasks.filter(t => !!t.endTime), 
           finishedTasks: subTasks.some(t => !!t.endTime),
           overalPeriod: this.tasksService.calculateOveralTaskPeriods(subTasks)
-        })).value().reverse() as Task[], 
+        }))
+        .sort(
+          (objA, objB) => {
+            return(Number(moment((objB.tasks[0]?.endTime))) - Number(moment((objA.tasks[0]?.endTime))))
+        })
+        .value() as Task[], 
         finishedTasks: tasks.some(t => !!t.endTime) }))
       .value()
     );
+
   }
 
   playTask(task: Task){
@@ -206,10 +223,11 @@ export class HomeComponent implements OnInit {
   updateTasks(tasks: Task[], task: Task){
     for (let index = 0; index < tasks.length; index++) {
       if(tasks[index]._id === task._id){
-        tasks[index] = task;
+        tasks[index] = {...tasks[index], ...task};
         return
       }
     }
-    tasks.unshift(task);
+
+    tasks.unshift(task)
   }
 }

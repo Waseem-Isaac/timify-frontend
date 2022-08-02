@@ -41,6 +41,7 @@
     "lodash": "^4.17.21",
     "material-design-icons-iconfont": "^6.1.0",
     "moment": "^2.29.1",
+    "ngx-infinite-scroll": "^14.0.0",
     "npm": "^8.15.0",
     "path": "^0.12.7",
     "rxjs": "^7.4.0",

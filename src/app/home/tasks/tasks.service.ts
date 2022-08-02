@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Task , Project} from '@app/@shared/interfaces';
+import { Task , Project, PaginatedListResponse} from '@app/@shared/interfaces';
 import { CredentialsService } from '@app/auth';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class TasksService {
   canPlayTask!: boolean; 
+  pageLimit = 12;
 
   constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
@@ -45,6 +46,9 @@ export class TasksService {
     }
   }
 
+  // getTasks(before: any): Observable<PaginatedListResponse<Task>>{
+  //   return this._http.get<PaginatedListResponse<Task>>(`tasks?before=${before}`);
+  // }
   getTasks(): Observable<Task[]>{
     return this._http.get<Task[]>('tasks');
   }
@@ -55,6 +59,14 @@ export class TasksService {
 
   stopTask(task: Task){
     return this._http.put<{message: string, task: Task}>('tasks/'+task?._id, task);
+  }
+
+  editTask(task: Task){
+    return this._http.put<{message: string, task: Task}>('tasks/'+task?._id, task);
+  }
+
+  editManyTasks(tasks: any[]){
+    return this._http.put<{message: string, task: Task}>('tasks', {tasks});
   }
 
   deleteTask(taskId: string){
@@ -75,8 +87,8 @@ export class TasksService {
     return this._http.get<Project[]>('projects');
   }
 
-  getAllTasks(): Observable<Task[]>{
-    return this._http.get<Task[]>('tasks/all');
+  getAllTasks(page: number): Observable<PaginatedListResponse<Task>>{
+    return this._http.get<PaginatedListResponse<Task>>(`tasks/all?page=${page}&limit=${this.pageLimit}`);
   }
 
   calculateOveralTaskPeriods(tasks :Task[]){
