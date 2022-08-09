@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit {
   }
 
   playTask(task: Task){
-    task['period'] = '00:00:00';
+    task['period'] = '0:00:00';
 
     this.periodInterval = setInterval(() => {
       task['period'] = (this.tasksService.calculateTaskPeriod(task?.startTime, task?.endTime  || new Date())).asString;
