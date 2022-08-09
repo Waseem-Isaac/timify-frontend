@@ -2,7 +2,7 @@
     <div *ngFor="let task of tasks; trackBy: identifyer">
         <ng-container *ngIf="task?.finishedTasks; else notFinishedTask">
             <div class="dayTasks">
-                <div class="m-t-20 m-l-20 m-b-10">
+                <div class="m-t-20 m-l-20 m-b-10 day-title">
                     <b>{{task?.day}}</b>
                 </div>
                 <div *ngFor="let task of task.tasks; trackBy: identifyer">

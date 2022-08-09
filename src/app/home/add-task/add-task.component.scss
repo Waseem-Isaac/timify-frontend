@@ -14,19 +14,23 @@
 
         min-height: 80px;
         #add_task_input{
-          width: 70%;
+          width: 75%;
           padding: 10px ;
           outline: none;
           border: none;
           font-weight: 600;
           font-size: 16px;
+          color: mat-color($app-primary);
         }
         .additional-data {
-          width: 25%; 
+          width: 23%; 
           display: flex;
           justify-content: space-between;
           align-items: center;
-    
+          .timer {
+            color: mat-color($app-primary);
+          }
+
           .start, .add {
             background-color:  mat.get-color-from-palette($app-primary);
             color: #fff;
@@ -44,8 +48,14 @@
             background-color: mat.get-color-from-palette($app-warn);
             color: #fff;
           }
-          .start, .stop{
-            border-radius: 0;
+          .start, .stop, .add{
+            // border-radius: 0;
+            border-radius: 50%;
+            height: 40px;
+            min-width: 40px;
+            line-height: normal;
+            padding: 0;
+
 
             &:hover{
               outline-width: 4px;
@@ -54,13 +64,21 @@
           }
 
           &.manual{
-            width: 45%;
+            width: 50%;
+
+            .manualTimeInputs {
+              margin: 0 20px;
+              gap: 5px;
+            }
           }
+
+           
+          
          
         }
 
         .actions {
-          display: flex; gap: 10px; align-items: center;
+          display: flex; gap: 20px; align-items: center;
           .mat-button-toggle-group {
             height: 44px;
             border-radius: 5px;
@@ -103,16 +121,23 @@
 
 
 ::ng-deep {
+  .mat-select{
+    font-family: Poppins,Arial,sans-serif !important;
+    font-size: 14px;
+  }
   .mat-select-panel {
     overflow: hidden !important;
   }
   .mat-form-field.select-project {
+    .mat-select-value {
+      color: mat-color($app-primary, 500);
+    }
     .mat-select-arrow{
       color: $color-grey;
     }
     mat-label mat-icon#icon {
       font-size: 20px;
-      color: $color-grey;
+      color: mat-color($app-primary, 200);
     }
     &:not(.mat-form-field-should-float){
       width: 40px;
@@ -248,7 +273,6 @@
 
 .datetime-container{
   border: solid 1px rgba(0, 0, 0, 0.10);
-  margin: 0 10px;
   padding: 0 9px;
   width: 200px;
   font-size: 14px;

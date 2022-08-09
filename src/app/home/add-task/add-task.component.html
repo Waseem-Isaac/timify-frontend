@@ -6,7 +6,7 @@
       <div>
           <mat-form-field class="select-project" appearance="none">
             <mat-label>
-               <mat-icon id="icon">folder_open</mat-icon>
+               <mat-icon id="icon">create_new_folder</mat-icon>
             </mat-label>
 
 
@@ -40,8 +40,8 @@
       <!-- ========================== -->
 
       <!-- Timer -->
-      <div class="timer" *ngIf="mode === 'timer';else manualTimes">
-        {{!isPlaying ? ' 00:00:00' : (isPlaying.period) }} 
+      <div class="timer m-t-2" *ngIf="mode === 'timer';else manualTimes">
+        <b>{{!isPlaying ? ' 0:00:00' : (isPlaying.period) }}</b> 
       </div>
       <ng-template #manualTimes>
         <div class="flex-sb flex-m manualTimeInputs"> 
