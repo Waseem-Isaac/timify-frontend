@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   quote: string | undefined;
   isLoading = false;
+  isTaskLoading= false;
   tasks: Task[] = [];
   categorizedTasks: CategoizedTaskPerDay[]= [];
   isPlaying!: Task | null | undefined;
@@ -68,6 +69,8 @@ export class HomeComponent implements OnInit {
   }
 
   onStartTask(task: any){
+    this.isTaskLoading = true;
+
     delete task['_id']; // alwayse start a new task with a fresh id .  on Play ,alwayse start new task, for case resume we'll start a new task with the same name ,then tasks will be categoized by their names.
 
     // When play new task, Stop the previously played one if exists.
@@ -80,7 +83,8 @@ export class HomeComponent implements OnInit {
         endTime: new Date()
       })
       this.tasksService.stopTask(taskToBeStopped).pipe(
-        concatMap(() => this.tasksService.startTask(task))
+        concatMap(() => this.tasksService.startTask(task)),
+        finalize(() => this.isTaskLoading = false)
       ).subscribe(res => {
         // play the timer.
         this.playTask(res['task']);
@@ -92,7 +96,9 @@ export class HomeComponent implements OnInit {
         this.categroizeTasksPerDay(this.tasks);
       })
     }else{ // else , start the new task normally.
-      this.tasksService.startTask(task).pipe().subscribe(res => {
+      this.tasksService.startTask(task).pipe(
+        finalize(() => this.isTaskLoading = false)
+      ).subscribe(res => {
         this.playTask(res['task']);
         this.updateTasks(this.tasks, res['task'])
         this.categroizeTasksPerDay(this.tasks);
@@ -101,7 +107,11 @@ export class HomeComponent implements OnInit {
   }
 
   onAddTaskManually(task: Task){
-    this.tasksService.startTask(task).pipe().subscribe(res => {
+    this.isTaskLoading = true;
+
+    this.tasksService.startTask(task).pipe(
+      finalize(() => this.isTaskLoading = false)
+    ).subscribe(res => {
       const addedTask = res['task'];
       this.isPlaying = null;      
       this.tasksService.canPlayTask = !this.isPlaying;
@@ -118,10 +128,14 @@ export class HomeComponent implements OnInit {
   }
 
   onStopTask(task: Task, endTime: Date = new Date()){
+    this.isTaskLoading = true;
+
     task['endTime'] = endTime;
     task['period'] = this.tasksService.calculateTaskPeriod(task?.startTime, task.endTime).asString;
 
-    this.tasksService.stopTask(task).pipe().subscribe(res => {
+    this.tasksService.stopTask(task).pipe(
+      finalize(() => this.isTaskLoading = false)
+    ).subscribe(res => {
       this.isPlaying = null;
       this.tasksService.canPlayTask = !this.isPlaying;
       clearInterval(this.periodInterval);
