@@ -60,6 +60,8 @@ body{
 ::placeholder {
   color: $color-grey;
   font-weight: normal;
+
+  color: mat-color($app-primary, 200);
 }
 
 /* Handle on hover */
@@ -135,6 +137,10 @@ body{
     position: fixed;
     // todo- handle both - large-small menu - move page header to shell component, or store menu status at a shared service.
     width: calc(100% - var(--menu-width));
+
+    .title{
+      color: mat-color($app-primary);
+    }
   }
   .page-content {
     padding-top: calc($page-header-height + 10px);
