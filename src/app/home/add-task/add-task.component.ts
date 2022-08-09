@@ -16,7 +16,8 @@ export class AddTaskComponent implements OnChanges{
   @Output() taskAddedManually$: EventEmitter<Task | any> = new EventEmitter();
   @Output() projectAdded$: EventEmitter<Project | any> = new EventEmitter();
   @Input() focus!: boolean;
-   
+  @Input() isTaskLoading!: boolean;
+
   @Input() projects!: Project[];
 
   description: string = this.isPlaying?.description || '';

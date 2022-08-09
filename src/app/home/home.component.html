@@ -4,7 +4,10 @@
   <app-add-task 
     (taskStarted$)="onStartTask($event)" (taskStopped$)="onStopTask($event)"
     (taskAddedManually$)="onAddTaskManually($event)"
-    (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus" [projects]="projects">
+    (projectAdded$)="onAddProject($event)" [isPlaying]="isPlaying" [focus]="focus" [projects]="projects"
+    
+    [isTaskLoading]="isTaskLoading"
+    >
   </app-add-task>
 
   <!-- Tasks list -->
