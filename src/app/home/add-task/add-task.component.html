@@ -6,7 +6,7 @@
       <div>
           <mat-form-field class="select-project" appearance="none">
             <mat-label>
-               <mat-icon id="icon">create_new_folder</mat-icon>
+               <mat-icon id="icon">folder</mat-icon>
             </mat-label>
 
 
@@ -78,18 +78,29 @@
       <!-- Actions -->
       <div class="actions">
         <div class="timer-mode" *ngIf="mode === 'timer';else manual_add">
-          <button *ngIf="!isPlaying; else is_playing" mat-flat-button class="start" (click)="start()"><mat-icon>play_arrow</mat-icon></button>
+          <button *ngIf="!isPlaying; else is_playing" mat-flat-button class="start" (click)="start()" [disabled]="isTaskLoading">            
+            <mat-icon *ngIf="!isTaskLoading; else loading">play_arrow</mat-icon>
+              <ng-template #loading>
+                <mat-spinner [diameter]="20"></mat-spinner>
+              </ng-template>
+          </button>
           <ng-template #is_playing>
-            <button mat-flat-button class="stop" (click)="stop()"><mat-icon>stop</mat-icon></button>
+            <button mat-flat-button class="stop" (click)="stop()"  [disabled]="isTaskLoading">
+              <mat-icon *ngIf="!isTaskLoading; else loading">stop</mat-icon>
+              <ng-template #loading>
+                <mat-spinner [diameter]="20"></mat-spinner>
+              </ng-template>
+            </button>
           </ng-template>
         </div>
         <ng-template #manual_add> 
-          <button mat-flat-button [disabled]="!manualTimeStart || !manualTimeEnd" class="add" (click)="manualAdd()"><mat-icon>add</mat-icon></button>
+          <button mat-flat-button [disabled]="!manualTimeStart || !manualTimeEnd || isTaskLoading" class="add" (click)="manualAdd()"><mat-icon>add</mat-icon></button>
         </ng-template>
           
         <mat-button-toggle-group [disabled]="!!isPlaying" #group="matButtonToggleGroup" [vertical]="true" [value]="mode" (change)="onModeChange(group.value)">
           <mat-button-toggle [matTooltip]="'Timer'" value="timer" aria-label="Text align left">
             <mat-icon>timer</mat-icon>
+            
           </mat-button-toggle>
           <mat-button-toggle [matTooltip]="'Manual'" value="manual" aria-label="Text align center">
             <!-- <mat-icon>note_add</mat-icon> -->
