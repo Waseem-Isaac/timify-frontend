@@ -22,4 +22,8 @@ export class ReportsService {
     getProjects(): Observable<Project[]> {        
         return this._http.get<Project[]>('projects/all')
     }
+
+    getReportPerTasks(){
+        return this._http.get<any>('reports/tasks')
+    }
 }

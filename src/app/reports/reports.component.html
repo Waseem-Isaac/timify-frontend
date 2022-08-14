@@ -7,36 +7,86 @@
     </div>
     
     <div class="page-content">
-        <div class="summary row" *ngIf="(reportsCounts$ | async) as count; else loading">
-            <div class="tasks count" [routerLink]="'tasks'" [routerLinkActive]="'active'">
-                <div>Tasks</div>
-                <span>{{count?.tasks}}</span>
+
+     <div class="top-tasks" *ngIf="(topTasks$ | async) as tasks; else loading">
+          <div *ngFor="let t of (tasks); let i = index" 
+               [style.width]="(t.periodAsANumber /1000000 * (100)) + '%'"
+               [style.background]="'var(--main-bg-color-'+i+')'"
+               [style.color]="'white'"
+
+               [matTooltip]="t?.user?.username  + ' - ' +(t?.project?.name || 'No project') + ' - ' + t?.description" 
+          >
+               <h3 [style.fontSize]="(t.periodAsANumber /1000000 * (100)) < 1000 ? '12px' : 'auto'">{{t.period}}</h3>
+               <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.user?.username}}</span>
+               <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span>
+          </div>
+     </div>
+
+        <div class="summary row" *ngIf="(reportsCounts$ | async) as count">
+            <!-- <div class="tasks count" [routerLink]="'tasks'" [routerLinkActive]="'active'">
+               <span>{{count?.tasks}}</span>
+               <div>Tasks</div>
            </div>
            <div class="team count" [routerLink]="'team'" [routerLinkActive]="'active'">
-                <div>Team</div>
-                <span>{{count?.team}}</span>
+               <span>{{count?.team}}</span> 
+               <div>Team</div>
            </div>
            <div class="projects count" [routerLink]="'project'" [routerLinkActive]="'active'">
-                <div>Projects</div>
-                <span>{{count?.projects}}</span>
-           </div>
+               <span>{{count?.projects}}</span> 
+               <div>Projects</div>
+           </div> -->
+           
+
+           <h3>
+               <span class="count">{{count?.[reportPerWhat]}}</span> {{reportPerWhat}} 
+               <code><b>(Module is in-progress yet.)</b></code>
+
+           </h3>
+          <mat-form-field appearance="fill">
+          <mat-label>Report by</mat-label>
+          <mat-select  [(ngModel)]="reportPerWhat">
+          <mat-option *ngFor="let report of [{name: 'Tasks', value: 'tasks'}, {name: 'Team', value: 'team'}, {name: 'projects', value: 'projects'}]" 
+               [value]="reportPerWhat"
+               [routerLink]="report?.value"
+               >
+               {{report?.name}}
+          </mat-option>
+          </mat-select>
+          </mat-form-field>
+
+
+
+
         </div>
 
         <ng-template #loading> 
-            <div class="summary row">
+            <!-- <div class="summary row">
                 <div class="tasks count" [routerLink]="'tasks'" [routerLinkActive]="'active'">
+                    <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                      <div>Tasks</div>
-                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                 </div>
                 <div class="team count" [routerLink]="'team'" [routerLinkActive]="'active'">
+                    <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                      <div>Team</div>
-                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                 </div>
                 <div class="projects count" [routerLink]="'project'" [routerLinkActive]="'active'">
+                    <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                      <div>Projects</div>
-                     <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                 </div>
-             </div>
+             </div> -->
+             <div class="top-tasks">
+               <div *ngFor="let t of ([1,2,3,4]); let i = index" 
+                    [style.width]="(30) + '%'"
+                    [style.background]="'var(--main-bg-color-'+i+')'"
+                    [style.color]="'white'"
+               >
+                    <h3 [style.fontSize]="(t.periodAsANumber /1000000 * (100)) < 1000 ? '12px' : 'auto'">
+                         <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
+                    </h3>
+                    <!-- <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.user?.username}}</span>
+                    <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span> -->
+               </div>
+          </div>
         </ng-template>
         <router-outlet></router-outlet>
     </div>

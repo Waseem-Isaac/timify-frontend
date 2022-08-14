@@ -20,6 +20,8 @@ export class ReportsComponent implements OnInit {
 
   reportsCounts$: Observable<{tasks: number, projects: number, team: number}> = this.reportsService.countReports(); 
 
+  topTasks$: Observable<any> = this.reportsService.getReportPerTasks();
+
   constructor(private router: Router, public reportsService: ReportsService) {    
     const onNavigationEnd = this.router.events.pipe(filter((event) => event instanceof NavigationEnd));
     onNavigationEnd.subscribe(route => {
