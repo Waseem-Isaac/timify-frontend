@@ -47,28 +47,41 @@
   &.summary{
     margin-bottom: 10px;
     padding: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
     // gap: .100px;
-    >div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    // >div {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   gap: 10px;
 
-      background: mat-color($app-primary, 300);
-      color: #fff;
-      padding: 15px;
+    //   background: mat-color($app-primary, 300);
+    //   color: #fff;
+    //   padding: 15px;
 
-      height: 100px;
-      width: 100%;
+    //   height: 50px;
+    //   width: 100%;
 
-      cursor: pointer;
-      span {
-        font-size: 30px;
-        font-weight: 600;
+    //   cursor: pointer;
+    //   span {
+    //     font-size: 30px;
+    //     font-weight: 600;
+    //   }
+
+    //   &.active{
+    //     background-color: mat-color($app-primary);
+    //   }
+    // }
+    
+    h3{
+      margin: 0;
+      text-transform: capitalize;
+      color: mat-color($app-primary);
+      span.count {
+        font-size: 60px;
       }
-
-      &.active{
-        background-color: mat-color($app-primary);
+      code {
+        font-size: 10px;
       }
     }
   }
@@ -111,3 +124,24 @@
 }
 
 
+.top-tasks {
+  display: flex;
+  // background-color: blue;
+  // padding: 5px;
+  max-width: 100%;
+  // margin: 20px 10px;
+  > div{
+    padding: 0 15px;
+    height: 100px;
+    h3{
+      margin: 0px 0 10px
+    }
+  }
+  div {
+    // padding: 10px;
+    display: flex; justify-content: center; flex-direction: column;
+    span{
+      font-size: 12px;
+    }
+  }
+}
