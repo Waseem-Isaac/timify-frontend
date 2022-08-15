@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   serverErrMsg!: string;
   projects: Project[]= [];
   mode: 'timer' | 'manual' = 'timer';
+  allTotalPeriods: string = '0:00:00';
+  todayTotalPeriods: string = '0:00:00';
 
   constructor(private tasksService: TasksService) {}
 
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
       // Category tasks per day.
       this.categroizeTasksPerDay(this.tasks);
       this.handleInprogressTask(res);
-      
+      this.calculateTotalPeriods()
     }, err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }
 
@@ -94,6 +96,7 @@ export class HomeComponent implements OnInit {
         this.updateTasks(this.tasks, res['task'])
         // re-categorize the tasks with the new one.
         this.categroizeTasksPerDay(this.tasks);
+        this.calculateTotalPeriods()
       })
     }else{ // else , start the new task normally.
       this.tasksService.startTask(task).pipe(
@@ -102,6 +105,7 @@ export class HomeComponent implements OnInit {
         this.playTask(res['task']);
         this.updateTasks(this.tasks, res['task'])
         this.categroizeTasksPerDay(this.tasks);
+        this.calculateTotalPeriods()
       })
     }
   }
@@ -123,6 +127,7 @@ export class HomeComponent implements OnInit {
       addedTask['project'] = this.tasksService.getProjectById(this.projects, projectID);
       this.updateTasks(this.tasks, addedTask)
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
      
     })
   }
@@ -143,6 +148,7 @@ export class HomeComponent implements OnInit {
       // on stop task .. appned the it into the tasks list.
       this.updateTasks(this.tasks, res['task'])
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
     })
   }
   
@@ -151,6 +157,7 @@ export class HomeComponent implements OnInit {
     ).subscribe(res => {
       this.updateTasks(this.tasks, res['task'])
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
     })
   }
 
@@ -162,6 +169,7 @@ export class HomeComponent implements OnInit {
       });
       
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
     })
   }
   
@@ -170,6 +178,7 @@ export class HomeComponent implements OnInit {
     this.tasksService.deleteTask(taskId).pipe().subscribe(res => {
       this.tasks = this.tasks.filter(t => t._id !== taskId)
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
     })
   }
 
@@ -178,6 +187,7 @@ export class HomeComponent implements OnInit {
       
       this.tasks = this.tasks.filter((t: any) => tasksIds.indexOf(t._id) < 0);
       this.categroizeTasksPerDay(this.tasks);
+      this.calculateTotalPeriods()
     })
   }
 
@@ -244,4 +254,13 @@ export class HomeComponent implements OnInit {
 
     tasks.unshift(task)
   }
+
+  calculateTotalPeriods(){
+    // calculate total periods.
+    this.allTotalPeriods = this.tasks.map(t => t.period).reduce((a, value) =>  moment(moment(a, '"H:mm:ss"').add(moment.duration(value))).format("H:mm:ss"), '0:00:00')
+    
+    // calculate today's periods
+    const todaysTasks = this.categorizedTasks.find(t => t.day === 'Today')?.tasks || [];
+    this.todayTotalPeriods = todaysTasks.map(t => t.overalPeriod).reduce((a, value) =>  moment(moment(a, '"H:mm:ss"').add(moment.duration(value))).format("H:mm:ss"),'0:00:00')
+ }
 }

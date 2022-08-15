@@ -10,6 +10,17 @@
     >
   </app-add-task>
 
+  <div class="flex-m flex-r totalPeriods">
+   <div class="flex-m flex-c">
+    <div>Today's Total</div>
+    <b>{{todayTotalPeriods}}</b>
+   </div>
+    <div class="flex-m flex-c">
+      <div>Total</div>
+      <b>{{allTotalPeriods}}</b>
+    </div>
+  </div>
+
   <!-- Tasks list -->
   <div *ngIf="(categorizedTasks?.length); else loading">
     <app-tasks 

@@ -5,4 +5,21 @@
 .container {
   // padding: 0 .5em; 
   min-width: 1055px; 
+
+  .totalPeriods {
+    // margin: 20px;
+    gap: 30px;
+
+        background: #f1f1f1;
+        color: mat-color($app-primary);
+        padding: 10px;
+
+    >div{
+      gap: 10px;
+      >div { font-size: 11px;}
+      b {
+        font-size: 14px;
+      }
+    }
+  }
 }
