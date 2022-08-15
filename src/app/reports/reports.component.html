@@ -10,15 +10,15 @@
 
      <div class="top-tasks" *ngIf="(topTasks$ | async) as tasks; else loading">
           <div *ngFor="let t of (tasks); let i = index" 
-               [style.width]="(t.periodAsANumber /1000000 * (100)) + '%'"
+               [style.width]="(t.periodAsANumber /99999 * (100)) + '%'"
                [style.background]="'var(--main-bg-color-'+i+')'"
                [style.color]="'white'"
 
                [matTooltip]="t?.user?.username  + ' - ' +(t?.project?.name || 'No project') + ' - ' + t?.description" 
           >
-               <h3 [style.fontSize]="(t.periodAsANumber /1000000 * (100)) < 1000 ? '12px' : 'auto'">{{t.period}}</h3>
-               <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.user?.username}}</span>
-               <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span>
+               <h3 [style.fontSize]="(t.periodAsANumber /99999 * (100)) < 1000 ? '12px' : 'auto'">{{t.period}}</h3>
+               <span [hidden]="(t.periodAsANumber /99999 * (100)) < 1000">{{t.user?.username}} - {{t.project?.name || 'No Project'}}</span>
+               <!-- <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span> -->
           </div>
      </div>
 
@@ -80,11 +80,11 @@
                     [style.background]="'var(--main-bg-color-'+i+')'"
                     [style.color]="'white'"
                >
-                    <h3 [style.fontSize]="(t.periodAsANumber /1000000 * (100)) < 1000 ? '12px' : 'auto'">
+                    <h3 [style.fontSize]="(t.periodAsANumber /99999 * (100)) < 1000 ? '12px' : 'auto'">
                          <span class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></span>
                     </h3>
-                    <!-- <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.user?.username}}</span>
-                    <span [hidden]="(t.periodAsANumber /1000000 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span> -->
+                    <!-- <span [hidden]="(t.periodAsANumber /99999 * (100)) < 1000">{{t.user?.username}}</span>
+                    <span [hidden]="(t.periodAsANumber /99999 * (100)) < 1000">{{t.project?.name || 'No Project'}}</span> -->
                </div>
           </div>
         </ng-template>
