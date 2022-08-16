@@ -20,12 +20,14 @@
           </div>
 
           <div class="report-title row" *ngIf="(reportsCounts$ | async) as count; else isCountLoading">
-               <h3>
-                    <span class="count">{{count?.[reportPerWhat]}}</span> {{reportPerWhat}}
-                    <code><b>(Module is in-progress yet.)</b></code>
-
+              
+               <h3 
+                    *ngFor="let report of [{name: 'Tasks', value: 'tasks'}, {name: 'Team', value: 'team'}, {name: 'projects', value: 'projects'}]"
+                    [routerLink]="report['value']" [routerLinkActive]="'active'"          
+               >
+                    <span class="count">{{count?.[report.value]}}</span> {{report?.name}}
                </h3>
-               <mat-form-field appearance="fill">
+               <!-- <mat-form-field appearance="fill">
                     <mat-label>Report by</mat-label>
                     <mat-select [(ngModel)]="reportPerWhat">
                          <mat-option
@@ -34,7 +36,7 @@
                               {{report?.name}}
                          </mat-option>
                     </mat-select>
-               </mat-form-field>
+               </mat-form-field> -->
           </div>
 
           <ng-template #loading>
@@ -70,7 +72,7 @@
 
           <ng-template #isCountLoading>
                <div class="report-title row">
-                    <h3>
+                    <h3 class="flex-c flex-m"  *ngFor="let report of [{name: 'Tasks', value: 'tasks'}, {name: 'Team', value: 'team'}, {name: 'projects', value: 'projects'}]">
                          <span class="count">
                               <span class="dots">
                                    <div class="dot"></div>
@@ -78,19 +80,7 @@
                                    <div class="dot"></div>
                               </span>
                          </span>
-
-
                     </h3>
-                    <span class="dots">
-                         <div class="dot"></div>
-                         <div class="dot"></div>
-                         <div class="dot"></div>
-                    </span>
-
-
-
-
-
                </div>
           </ng-template>
           <router-outlet></router-outlet>
