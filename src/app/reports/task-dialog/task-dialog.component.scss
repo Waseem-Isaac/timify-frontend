@@ -1,0 +1,10 @@
+ .row:last-of-type{
+    box-shadow: none
+}
+
+
+.description .row{
+    >div{
+        width: 100%;
+    }
+}
