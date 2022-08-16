@@ -161,9 +161,23 @@ body{
     .title{
       color: mat-color($app-primary);
     }
+    z-index: 99;
   }
   .page-content {
     padding-top: calc($page-header-height);
   }
    
+}
+
+
+.custom-task-dialog-backdrop {
+    background:rgb(176 190 197/ 90%);
+  &+.cdk-global-overlay-wrapper{
+    .custom-task-dialog {
+      margin-top: -7%;
+      .mat-dialog-container{
+        padding: 20px 10px;
+      }
+    }
+  }
 }

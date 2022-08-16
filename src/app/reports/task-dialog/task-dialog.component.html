@@ -1,0 +1,65 @@
+<div class="description">
+
+    <div class="row table-header">
+        <div>
+            Description
+        </div>
+    </div>
+    <div class="row">
+        <div class="description">
+            {{data?.description }}
+        </div>
+    </div>
+
+
+</div>
+<div class="rest-data">
+    <div class="row table-header">
+        <!-- <div class="description">
+            Description
+        </div> -->
+
+        <div class="">
+            Username
+        </div>
+
+        <div class="">
+            Project
+        </div>
+
+        <div class="">
+            Start Time
+        </div>
+        <div class="">
+            End Time
+        </div>
+
+        <div class="tasks">Period</div>
+    </div>
+    <div class="row">
+        <!-- <div class="description" [matTooltip]="data?.description?.length > 80 ? data?.description : ''">
+            {{data?.description | truncate: [80, '...']}}
+        </div> -->
+
+        <div class="">
+            {{data?.user?.username}}
+        </div>
+
+        <div class="">
+            {{data?.project?.name || 'No Project'}}
+        </div>
+
+        <div class="">
+            {{data?.startTime | date:"short"}}
+        </div>
+        <div class="">
+            {{data?.endTime | date:"short"}}
+        </div>
+
+        <div class="">
+            {{data?.period}}
+        </div>
+
+        <!-- <div class="tasks" ><b class="badge">z</b></div> -->
+    </div>
+</div>

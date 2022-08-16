@@ -1,20 +1,21 @@
 <ng-container *ngIf="(projects?.length); else loading">
-    <div class="row table-header">
-        <div class="name">
-            name
-        </div>
-
-    </div>
-    <div *ngFor="let project of projects">
-        <div class="row">
-    
-            <div class="">
-                {{project?.name}}
+    <div class="results">
+        <div class="row table-header">
+            <div class="name">
+                name
             </div>
     
         </div>
+        <div *ngFor="let project of projects">
+            <div class="row">
+        
+                <div class="">
+                    {{project?.name}}
+                </div>
+        
+            </div>
+        </div>
     </div>
-
 </ng-container>
 
 

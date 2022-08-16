@@ -10,9 +10,10 @@ import { TasksReportComponent } from './tasks-report/tasks-report.component';
 import { TeamReportComponent } from './team-report/team-report.component';
 import { ProjectsReportComponent } from './projects-report/projects-report.component';
 import { SharedModule } from '@app/@shared';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 
 @NgModule({
   imports: [CommonModule,  FormsModule,FlexLayoutModule, MaterialModule, SharedModule,ReportsRoutingModule],
-  declarations: [ReportsComponent, TasksReportComponent, TeamReportComponent, ProjectsReportComponent],
+  declarations: [ReportsComponent, TasksReportComponent, TeamReportComponent, ProjectsReportComponent, TaskDialogComponent],
 })
 export class ReportsModule {}
