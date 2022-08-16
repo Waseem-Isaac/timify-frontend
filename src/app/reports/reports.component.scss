@@ -44,34 +44,11 @@
       color: #fff;
   }
 
-  &.summary{
+  &.report-title{
     margin-bottom: 10px;
     padding: 10px;
     justify-content: space-between;
-    // gap: .100px;
-    // >div {
-    //   display: flex;
-    //   flex-direction: column;
-    //   justify-content: center;
-    //   gap: 10px;
-
-    //   background: mat-color($app-primary, 300);
-    //   color: #fff;
-    //   padding: 15px;
-
-    //   height: 50px;
-    //   width: 100%;
-
-    //   cursor: pointer;
-    //   span {
-    //     font-size: 30px;
-    //     font-weight: 600;
-    //   }
-
-    //   &.active{
-    //     background-color: mat-color($app-primary);
-    //   }
-    // }
+    height: 100px;
     
     h3{
       margin: 0;
@@ -82,6 +59,19 @@
       }
       code {
         font-size: 10px;
+      }
+    }
+
+    ::ng-deep {
+      * {
+        font-family: Poppins,Arial,sans-serif !important;
+      }
+
+      .mat-form-field-appearance-fill .mat-form-field-flex{
+        background-color: mat-color($app-primary,100);
+      }
+      .mat-select-value{
+        color: mat-color($app-primary);
       }
     }
   }

@@ -161,6 +161,7 @@ body{
     .title{
       color: mat-color($app-primary);
     }
+    z-index: 99;
   }
   .page-content {
     padding-top: calc($page-header-height);
