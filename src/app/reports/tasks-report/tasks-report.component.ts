@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Pagination, Task } from '@app/@shared/interfaces';
 import { TasksService } from '@app/home/tasks/tasks.service';
 import { finalize, Observable } from 'rxjs';
+import { ReportsService } from '../reports.service';
+import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-tasks-report',
@@ -16,7 +19,10 @@ export class TasksReportComponent implements OnInit {
   pagination: Pagination;
 
   tasks: Task[] = [];
-  constructor(private tasksService: TasksService) { }
+
+  topTasks$: Observable<any> = this.reportsService.getTopTasks();
+
+  constructor(private tasksService: TasksService, private reportsService: ReportsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getTasks(this.page);
@@ -36,5 +42,15 @@ export class TasksReportComponent implements OnInit {
     if(this.page < this.pagination.lastPage){
       this.getTasks(++this.page);
     }
+  }
+
+  showTask(data: any){
+    const dialogRef = this.dialog.open(TaskDialogComponent, {panelClass: 'custom-task-dialog', width: '100%', data, 
+    backdropClass: 'custom-task-dialog-backdrop'
+  });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

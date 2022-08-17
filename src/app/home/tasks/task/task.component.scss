@@ -64,6 +64,13 @@
                 color: mat-color($app-primary);
             }
         }
+
+        input{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 90%;
+        }
     }
     .additional-info {
         font-size: 15px;

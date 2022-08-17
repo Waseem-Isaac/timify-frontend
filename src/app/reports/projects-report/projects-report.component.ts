@@ -13,7 +13,7 @@ export class ProjectsReportComponent implements OnInit {
   serverErrMsg!: string;
 
   projects: Project[] = [];
-
+  topProjects: Project[]= []
   constructor(public reportsService: ReportsService) { }
 
   ngOnInit(): void {
@@ -23,6 +23,13 @@ export class ProjectsReportComponent implements OnInit {
   getTeam(){
     this.reportsService.getProjects().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
       this.projects = res;
+      this.projects.forEach(p => {
+        p['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(p?.['tasksTime'])?.asString
+      });
+
+      this.topProjects = this.projects.slice(0,4);
+
+
     },err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }
 }

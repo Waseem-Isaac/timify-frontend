@@ -1,4 +1,19 @@
 <ng-container *ngIf="(tasks?.length); else loading" >
+    
+
+    <div class="top tasks" *ngIf="(topTasks$ | async) as tasks; else topTasksLoading">
+        <div *ngFor="let t of (tasks); let i = index" [style.width]="(t.periodAsANumber /99999 * (100)) + '%'"
+             [style.background]="'var(--main-bg-color-'+i+')'" [style.color]="'white'"
+             (click)="showTask(t)"
+             >
+             <h3 [style.fontSize]="(t.periodAsANumber /99999 * (100)) < 1000 ? '12px' : 'auto'">{{t.period}}</h3>
+             <span [hidden]="(t.periodAsANumber /99999 * (100)) < 1000">{{t.user?.username}} - {{t.project?.name
+                  || 'No Project'}}</span>
+        </div>
+   </div>
+
+
+
     <div
         class="results"
         infiniteScroll
@@ -25,12 +40,16 @@
                 Start Date
             </div>
 
+            <div class="">
+                End Date
+            </div>
+
             <div class="tasks">Period</div>
         </div>
         <div *ngFor="let task of (tasks)">
             <div class="row">
                 <div class="description" [matTooltip]="task?.description?.length > 80 ? task?.description : ''">
-                    {{task?.description | truncate: [80, '...']}}
+                    {{task?.description | truncate: [50, '...']}}
                 </div>
 
                 <div class="">
@@ -43,6 +62,10 @@
 
                 <div class="">
                     {{task?.startTime | date:"short"}}
+                </div>
+
+                <div class="">
+                    {{task?.endTime | date:"short"}}
                 </div>
 
                 <div class="">
@@ -78,3 +101,18 @@
     </ng-template>
   </div>
   </ng-template>
+
+  <ng-template #topTasksLoading>
+    <div class="top">
+         <div *ngFor="let t of ([1,2,3,4]); let i = index" [style.width]="(30) + '%'"
+              [style.background]="'var(--main-bg-color-'+i+')'" [style.color]="'white'">
+              <h3 [style.fontSize]="(t.periodAsANumber /99999 * (100)) < 1000 ? '12px' : 'auto'">
+                   <span class="dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                   </span>
+              </h3>
+         </div>
+    </div>
+</ng-template>
