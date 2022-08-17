@@ -13,6 +13,7 @@ export class TeamReportComponent implements OnInit {
   serverErrMsg!: string;
 
   team: RegisterContext[] = [];
+  topMembers: RegisterContext[] = [];
 
   constructor(public reportsService: ReportsService) { }
 
@@ -23,6 +24,14 @@ export class TeamReportComponent implements OnInit {
   getTeam(){
     this.reportsService.getTeam().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
       this.team = res;
+      
+      this.team.forEach(member => {
+        member['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(member?.['tasksTime'])?.asString
+      });
+      
+      this.topMembers = this.team.slice(0,4);
+      
+      
     },err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }
 }

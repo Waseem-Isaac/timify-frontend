@@ -1,8 +1,26 @@
 <ng-container *ngIf="(projects?.length); else loading">
+   
+    <div class="top projects" *ngIf="topProjects; else loading">
+        <div *ngFor="let p of (topProjects); let i = index" [style.width]="(p.tasksTime /99999 * (100)) + '%'"
+             [style.background]="'var(--main-bg-color-'+i+')'" [style.color]="'white'">
+             <h3 [style.fontSize]="(p.tasksTime /99999 * (100)) < 1000 ? '12px' : 'auto'">{{p.name}}</h3>
+             <span>{{p.totalPeriod}}</span>
+             
+        </div>
+   </div>
+   
+   
     <div class="results">
         <div class="row table-header">
             <div class="name">
                 name
+            </div>
+            <div class="">
+                Tasks Count
+            </div>
+
+            <div class="">
+                Total Time
             </div>
     
         </div>
@@ -11,6 +29,14 @@
         
                 <div class="">
                     {{project?.name}}
+                </div>
+
+                <div class="">
+                    {{project?.tasksCount}}
+                </div>
+        
+                <div class="">
+                    {{project?.totalPeriod}}
                 </div>
         
             </div>

@@ -1,4 +1,15 @@
 <ng-container *ngIf="(team?.length); else loading">
+   
+    <div class="top members" *ngIf="topMembers;">
+        <div *ngFor="let t of (topMembers); let i = index" [style.width]="(t.tasksTime /99999 * (100)) + '%'"
+             [style.background]="'var(--main-bg-color-'+i+')'" [style.color]="'white'"
+             >
+             <h3 [style.fontSize]="(t.tasksTime /99999 * (100)) < 1000 ? '12px' : 'auto'">{{t.username}}</h3>
+             <span>{{t.totalPeriod}}</span>
+             
+        </div>
+   </div>
+   
     <div class="results">
         <div class="row table-header">
             <div class="picture">
@@ -14,6 +25,9 @@
             </div>
         
             <div class="tasks">Number of Tasks</div>
+
+            <div class="tasks">Total time</div>
+
         </div>
         <div *ngFor="let member of team">
             <div class="row">
@@ -33,6 +47,11 @@
                 </div>
         
                 <div class="tasks" ><b class="badge">{{member?.tasksCount}}</b></div>
+
+                <div>
+                    {{member?.totalPeriod}}
+                </div>
+
             </div>
         </div>
     </div>
