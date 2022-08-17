@@ -22,13 +22,13 @@ export class TasksService {
     if(moment.utc(diff).date() == 1){
       return {
         asObject: moment.duration(diff)['_data'],
-        asString: moment.utc(diff).format("H:mm:ss")
+        asString: moment.utc(diff).add(600,'milliseconds').format("H:mm:ss")
       } 
     }
     else {
       return {
         asObject: moment.duration(diff)['_data'],
-        asString: '00'+(moment.utc(diff).dayOfYear()-1) + ':'+ moment.utc(diff).format("H:mm:ss")
+        asString: '00'+(moment.utc(diff).dayOfYear()-1) + ':'+ moment.utc(diff).add(600,'milliseconds').format("H:mm:ss")
       } 
     }
   };

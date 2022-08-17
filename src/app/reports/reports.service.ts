@@ -23,7 +23,31 @@ export class ReportsService {
         return this._http.get<Project[]>('projects/all')
     }
 
-    getReportPerTasks(){
-        return this._http.get<any>('reports/tasks')
+    getTopTasks(){
+        return this._http.get<any>('reports/top-tasks')
     }
+
+    getTopMemebers(){
+        return this._http.get<any>('reports/top-users')
+    }
+
+    getTopProjects(){
+      return this._http.get<any>('reports/top-projects')
+  }
+
+
+    calculateTaskPeriodByTime(time: number): {asObject: any, asString: string}{        
+        if(moment.utc(time).date() == 1){
+          return {
+            asObject: moment.duration(time)['_data'],
+            asString: moment.utc(time).add(600,'milliseconds').format("H:mm:ss")
+          } 
+        }
+        else {
+          return {
+            asObject: moment.duration(time)['_data'],
+            asString: '00'+(moment.utc(time).dayOfYear()-1) + ':'+ moment.utc(time).add(600,'milliseconds').format("H:mm:ss")
+          } 
+        }
+      };
 }
