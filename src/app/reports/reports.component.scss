@@ -116,11 +116,11 @@
     .dot{
       background-color: #fff;
       width: 10px; height: 10px;
-      animation: a ease .5s infinite;
+      animation: flash ease .7s infinite;
       margin: 10px 0;
     }
 
-    @keyframes a {
+    @keyframes flash {
       from {
         background-color:  mat-color($app-primary, 100);
       }
@@ -151,5 +151,17 @@
     span{
       font-size: 12px;
     }
+  }
+}
+
+.legend{
+  >div{
+    margin: 10px;
+    gap: 10px;
+  }
+  .block{
+    width: 15px;
+    height: 15px;
+
   }
 }

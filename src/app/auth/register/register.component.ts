@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
             panelClass: ['custom-snackbar'],
             horizontalPosition: 'left',
             verticalPosition: 'bottom',
+            duration: 5000
           })
         }
       );

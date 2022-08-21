@@ -25,7 +25,8 @@ export class TaskComponent {
       this._snackBar.open('Please finish the currently playing task in order to play another one', 'Ok', {
         panelClass: ['custom-snackbar'],
         horizontalPosition: 'center',
-        verticalPosition: 'top'
+        verticalPosition: 'top',
+        duration: 5000
       })
       return
     }
