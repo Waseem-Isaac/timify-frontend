@@ -3,16 +3,22 @@ import { Injectable } from '@angular/core';
 import { Task, Project, RegisterContext } from '@app/@shared/interfaces';
 import { CredentialsService } from '@app/auth';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReportsService {
+    totalConsumedTime$: BehaviorSubject<number> = new BehaviorSubject(0)
     constructor(private _http: HttpClient, private credentialsService: CredentialsService) { }
 
     countReports(): Observable<{tasks: number, projects: number, team: number}> {        
         return this._http.get<{tasks: number, projects: number, team: number}>('reports/count')
+        .pipe(
+          tap((res) => {
+            this.totalConsumedTime$.next(res?.['totalTime'][0]?.value);
+          })
+        )
     }
 
     getTeam(): Observable<RegisterContext[]>{
@@ -40,13 +46,13 @@ export class ReportsService {
         if(moment.utc(time).date() == 1){
           return {
             asObject: moment.duration(time)['_data'],
-            asString: moment.utc(time).add(600,'milliseconds').format("H:mm:ss")
+            asString: moment.utc(time).add(999,'milliseconds').format("H:mm:ss")
           } 
         }
         else {
           return {
             asObject: moment.duration(time)['_data'],
-            asString: '00'+(moment.utc(time).dayOfYear()-1) + ':'+ moment.utc(time).add(600,'milliseconds').format("H:mm:ss")
+            asString: '00'+(moment.utc(time).dayOfYear()-1) + ':'+ moment.utc(time).add(999,'milliseconds').format("H:mm:ss")
           } 
         }
       };

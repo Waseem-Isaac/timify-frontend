@@ -24,14 +24,29 @@ export class TeamReportComponent implements OnInit {
   getTeam(){
     this.reportsService.getTeam().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
       this.team = res;
-      
+      let totaltime= 0;
+
       this.team.forEach(member => {
-        member['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(member?.['tasksTime'])?.asString
+        member['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(member?.['tasksTime'])?.asString;
+        totaltime += member?.['tasksTime'];
       });
       
-      this.topMembers = this.team.slice(0,4);
-      
+      // this.topMembers = this.team.slice(0,4);
+      this.calcTime()
       
     },err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
+  }
+
+  calcTime(){
+    this.reportsService.totalConsumedTime$.subscribe(totalTime => {
+
+      this.topMembers = [...this.team].slice(0,4)
+
+
+      this.topMembers.forEach(item => {
+        item['width'] = (item?.['tasksTime'] / totalTime) * 100;
+        item['width'] = item['width'] < 1 ?  ++item['width']:  item['width']  
+      });
+    })
   }
 }

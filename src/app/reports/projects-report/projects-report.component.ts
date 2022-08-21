@@ -13,7 +13,7 @@ export class ProjectsReportComponent implements OnInit {
   serverErrMsg!: string;
 
   projects: Project[] = [];
-  topProjects: Project[]= []
+  topProjects: {name: string, tasksTime: number , totalPriod: string}[]= []
   constructor(public reportsService: ReportsService) { }
 
   ngOnInit(): void {
@@ -23,13 +23,33 @@ export class ProjectsReportComponent implements OnInit {
   getTeam(){
     this.reportsService.getProjects().pipe(finalize(() => this.isLoading = false)).subscribe(res => {
       this.projects = res;
+      let totaltime= 0;
       this.projects.forEach(p => {
-        p['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(p?.['tasksTime'])?.asString
+        p['totalPeriod'] = this.reportsService.calculateTaskPeriodByTime(p?.['tasksTime'])?.asString;
+        totaltime += p?.['tasksTime'];
       });
 
-      this.topProjects = this.projects.slice(0,4);
-
-
+      this.calcTime(totaltime);
     },err =>  this.serverErrMsg = err?.error?.message || 'Something went wrong, Please try again later.')
   }
+
+
+  calcTime(projectsTime: number){
+    this.reportsService.totalConsumedTime$.subscribe(totalTime => {
+      let withoutProjectsTime = totalTime - projectsTime;
+
+      this.topProjects = [...this.projects as any, {
+        name: 'Without project',
+        tasksTime: withoutProjectsTime,
+        totalPeriod: this.reportsService.calculateTaskPeriodByTime(withoutProjectsTime).asString
+      }].slice(0,4).filter(p => p['tasksTime']> 0).sort((a,b) => b.tasksTime - a.tasksTime);
+
+
+      this.topProjects.forEach(p => {
+        p['width']  = (p?.['tasksTime'], ' - ', totalTime , ' - ' , (p?.['tasksTime'] / totalTime) * 100);
+        p['width'] = p['width'] < 1 ?  ++p['width']:  p['width']  
+      });
+    })
+  }
+
 }

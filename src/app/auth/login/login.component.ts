@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
           this._snackBar.open(error?.error?.message || 'Email or password are incorrect', 'Ok', {
             panelClass: ['custom-snackbar'],
             horizontalPosition: 'left',
-            verticalPosition: 'bottom'
+            verticalPosition: 'bottom',
+            duration: 5000
           })
         }
       );

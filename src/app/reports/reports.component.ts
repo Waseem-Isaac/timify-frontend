@@ -3,7 +3,7 @@ import {  NavigationEnd, Router } from '@angular/router';
 
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { ReportsService } from './reports.service';
 
 

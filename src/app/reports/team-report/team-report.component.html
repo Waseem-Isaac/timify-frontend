@@ -1,11 +1,21 @@
 <ng-container *ngIf="(team?.length); else loading">
    
+    <div class="legend flex-m">
+        <div *ngFor="let p of (topMembers); let i = index" class="flex-m flex-c">
+            <div [style.background]="'var(--main-bg-color-'+i+')'" class="block"></div>
+            <span>{{p.username}}</span>
+        </div>
+    </div>
     <div class="top members" *ngIf="topMembers;">
-        <div *ngFor="let t of (topMembers); let i = index" [style.width]="(t.tasksTime /99999 * (100)) + '%'"
+        <div *ngFor="let member of (topMembers); let i = index" [style.width]="member['width']+'%'"
              [style.background]="'var(--main-bg-color-'+i+')'" [style.color]="'white'"
+             [matTooltip]="member?.username  + ' - ' +(member?.totalPeriod)" 
              >
-             <h3 [style.fontSize]="(t.tasksTime /99999 * (100)) < 1000 ? '12px' : 'auto'">{{t.username}}</h3>
-             <span>{{t.totalPeriod}}</span>
+             <div *ngIf="member['width'] > 10">
+                <h3>{{member.username}}</h3>
+                <span>{{member.totalPeriod}}</span>
+             </div>
+             
              
         </div>
    </div>
