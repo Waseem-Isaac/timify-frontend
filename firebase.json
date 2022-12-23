@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/timify",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
