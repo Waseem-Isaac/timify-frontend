@@ -8,7 +8,6 @@
   },
   "scripts": {
     "ng": "ng",
-    "build": "npm run write:env -s && ng build",
     "serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
     "lint": "ng lint && stylelint \"src/**/*.scss\"",
     "test": "npm run write:env -s && ng test",
@@ -18,7 +17,9 @@
     "prettier": "prettier --write \"./src/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./src/**/*.{ts,js,html,scss}\"",
     "generate": "ng generate",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "ng build --prod --base-href https://Waseem-Isaac.github.io/timify-frontend/",
+    "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/timify"
   },
   "dependencies": {
     "@angular-material-components/datetime-picker": "^8.0.0",
