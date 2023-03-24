@@ -19,7 +19,7 @@
     "generate": "ng generate",
     "start": "node server.js",
     "build": "ng build --prod --base-href https://Waseem-Isaac.github.io/timify-frontend/",
-    "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/timify"
+    "deploy": "ng deploy --base-href=https://Waseem-Isaac.github.io/timify-frontend/"
   },
   "dependencies": {
     "@angular-material-components/datetime-picker": "^8.0.0",
@@ -67,6 +67,7 @@
     "@types/node": "^12.20.37",
     "@typescript-eslint/eslint-plugin": "~5.6.0",
     "@typescript-eslint/parser": "~5.6.0",
+    "angular-cli-ghpages": "^1.0.5",
     "eslint": "^8.3.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
