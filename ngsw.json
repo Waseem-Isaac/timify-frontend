@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1679700063951,
+  "timestamp": 1679700460248,
   "index": "https://Waseem-Isaac.github.io/timify-frontend/index.html",
   "assetGroups": [
     {
@@ -14,7 +14,7 @@
         "https://Waseem-Isaac.github.io/timify-frontend/425.a56cb86d2b4e95f0.js",
         "https://Waseem-Isaac.github.io/timify-frontend/favicon.ico",
         "https://Waseem-Isaac.github.io/timify-frontend/index.html",
-        "https://Waseem-Isaac.github.io/timify-frontend/main.688a02d7a16ebad0.js",
+        "https://Waseem-Isaac.github.io/timify-frontend/main.8304edddd8964d6f.js",
         "https://Waseem-Isaac.github.io/timify-frontend/manifest.webmanifest",
         "https://Waseem-Isaac.github.io/timify-frontend/polyfills.ec5b0bc4f16e4319.js",
         "https://Waseem-Isaac.github.io/timify-frontend/runtime.f55297e9d33a4e6a.js",
@@ -40,7 +40,8 @@
         "https://Waseem-Isaac.github.io/timify-frontend/assets/logo-white-2.png",
         "https://Waseem-Isaac.github.io/timify-frontend/assets/logo-white.png",
         "https://Waseem-Isaac.github.io/timify-frontend/assets/logo.png",
-        "https://Waseem-Isaac.github.io/timify-frontend/assets/logo.svg"
+        "https://Waseem-Isaac.github.io/timify-frontend/assets/logo.svg",
+        "https://Waseem-Isaac.github.io/timify-frontend/bg1.8b7a2cf6f117721d.svg"
       ],
       "patterns": []
     }
@@ -59,9 +60,10 @@
     "https://Waseem-Isaac.github.io/timify-frontend/assets/logo-white.png": "bb1140b5b6a123e929bed829d5b3b5471bfb6a50",
     "https://Waseem-Isaac.github.io/timify-frontend/assets/logo.png": "b05067e523c7c9650fbd46b57f78ae904d56c7da",
     "https://Waseem-Isaac.github.io/timify-frontend/assets/logo.svg": "ba6df033c1cee8833aa0bdd79744f5cddc06db47",
+    "https://Waseem-Isaac.github.io/timify-frontend/bg1.8b7a2cf6f117721d.svg": "ac3fd39afe92f98752ad4c502db876c666aefdd8",
     "https://Waseem-Isaac.github.io/timify-frontend/favicon.ico": "b65083d46bbf63692d5d2cdd69622e6d7ecae317",
-    "https://Waseem-Isaac.github.io/timify-frontend/index.html": "3fed75095bb9f393fa31c27cba533d2dc6698c4c",
-    "https://Waseem-Isaac.github.io/timify-frontend/main.688a02d7a16ebad0.js": "7808100e3d8582d36609137d4655ad8e022e521b",
+    "https://Waseem-Isaac.github.io/timify-frontend/index.html": "7b1c29ee88deb29c39fc598da9081672825bd3ab",
+    "https://Waseem-Isaac.github.io/timify-frontend/main.8304edddd8964d6f.js": "a3ad1e8d3583e41156606f5f746625b19d123043",
     "https://Waseem-Isaac.github.io/timify-frontend/manifest.webmanifest": "54622001e2e0fae8d1cfb7e04fb032581f3067c1",
     "https://Waseem-Isaac.github.io/timify-frontend/polyfills.ec5b0bc4f16e4319.js": "1f94b93c6dd95292755bd474b7833762ca829733",
     "https://Waseem-Isaac.github.io/timify-frontend/runtime.f55297e9d33a4e6a.js": "ca8d363914704657059b27be00148f51c84c8d2d",
